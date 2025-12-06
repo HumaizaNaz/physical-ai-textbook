@@ -10,6 +10,15 @@ async def read_root():
 async def get_embodied_intelligence_status():
     return {"status": "Embodied intelligence module is active!"}
 
+@app.get("/foundations")
+async def get_foundations_status():
+    return {"status": "Physical AI foundations endpoint active!"}
+
+@app.get("/sensor-data")
+async def get_sensor_data():
+    # In a real scenario, this would return simulated or actual sensor data
+    return {"temperature": 25.5, "humidity": 60, "pressure": 1012, "unit": "hPa"}
+
 
 if __name__ == "__main__":
     import uvicorn
