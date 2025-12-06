@@ -35,8 +35,13 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: '04 The AI-Robot Brain (NVIDIA Isaac)',
-      link: { type: 'doc', id: 'intro' }, 
-      items: [],
+      link: {type: 'doc', id: '04-isaac-brain/index'},
+      items: [
+        '04-isaac-brain/01-isaac-sim-overview',
+        '04-isaac-brain/02-synthetic-data-generation',
+        '04-isaac-brain/03-perception-and-manipulation',
+        '04-isaac-brain/04-reinforcement-learning-in-isaac-lab',
+      ],
     },
     {
       type: 'category',

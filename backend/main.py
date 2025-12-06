@@ -43,6 +43,22 @@ async def get_unity_robotics_status():
 async def get_urdf_xacro_modeling_status():
     return {"status": "URDF & XACRO Modeling endpoint active!"}
 
+@app.get("/isaac-sim-overview")
+async def get_isaac_sim_overview_status():
+    return {"status": "NVIDIA Isaac Sim Overview endpoint active!"}
+
+@app.get("/synthetic-data-generation")
+async def get_synthetic_data_generation_status():
+    return {"status": "Synthetic Data Generation endpoint active!"}
+
+@app.get("/perception-manipulation")
+async def get_perception_manipulation_status():
+    return {"status": "Perception and Manipulation endpoint active!"}
+
+@app.get("/reinforcement-learning")
+async def get_reinforcement_learning_status():
+    return {"status": "Reinforcement Learning in Isaac Lab endpoint active!"}
+
 
 if __name__ == "__main__":
     import uvicorn
