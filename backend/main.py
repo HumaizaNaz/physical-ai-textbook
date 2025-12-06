@@ -19,6 +19,18 @@ async def get_sensor_data():
     # In a real scenario, this would return simulated or actual sensor data
     return {"temperature": 25.5, "humidity": 60, "pressure": 1012, "unit": "hPa"}
 
+@app.get("/ros2-fundamentals")
+async def get_ros2_fundamentals_status():
+    return {"status": "ROS 2 Fundamentals endpoint active!"}
+
+@app.get("/ros2-nodes-topics-services")
+async def get_ros2_nodes_topics_services_status():
+    return {"status": "ROS 2 Nodes, Topics, Services endpoint active!"}
+
+@app.get("/ros2-actions-parameters")
+async def get_ros2_actions_parameters_status():
+    return {"status": "ROS 2 Actions and Parameters endpoint active!"}
+
 
 if __name__ == "__main__":
     import uvicorn

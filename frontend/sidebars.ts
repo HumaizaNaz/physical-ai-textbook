@@ -28,9 +28,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: '02 The Robotic Nervous System (ROS 2)',
-      link: {type: 'doc', id: '02-ros2-nervous-system/index'}, // Placeholder for future index.md
+      link: {type: 'doc', id: '02-ros2-nervous-system/index'},
       items: [
-        // Future ROS 2 lessons
+        '02-ros2-nervous-system/01-ros2-fundamentals',
+        '02-ros2-nervous-system/02-ros2-nodes-topics-services',
+        '02-ros2-nervous-system/03-ros2-actions-parameters',
       ],
     },
     {
