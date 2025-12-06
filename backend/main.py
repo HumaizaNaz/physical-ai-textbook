@@ -59,6 +59,14 @@ async def get_perception_manipulation_status():
 async def get_reinforcement_learning_status():
     return {"status": "Reinforcement Learning in Isaac Lab endpoint active!"}
 
+@app.get("/vision-language-action")
+async def get_vision_language_action_status():
+    return {"status": "Vision-Language-Action Models endpoint active!"}
+
+@app.get("/capstone-project")
+async def get_capstone_project_status():
+    return {"status": "Capstone Project Guidance endpoint active!"}
+
 
 if __name__ == "__main__":
     import uvicorn

@@ -10,10 +10,10 @@ sidebar_position: 2
 
 **NVIDIA Omniverse Replicator** is a powerful SDK built into Isaac Sim that enables the generation of high-quality, physically accurate synthetic data. Replicator allows developers to programmatically control the simulation environment, randomize scene elements (lighting, textures, object positions, camera angles), and automatically generate ground-truth labels (bounding boxes, segmentation masks, depth maps) at scale. This addresses key challenges:
 
-1.  **Data Scarcity:** Generate unlimited amounts of data for scenarios where real data is hard to obtain.
-2.  **Bias Reduction:** Control data distribution to reduce biases present in real-world datasets.
-3.  **Edge Cases:** Create data for rare or hazardous situations that are critical for robust robot operation.
-4.  **Cost-Effectiveness:** Significantly reduce the cost and time associated with manual data collection and labeling.
+1. **Data Scarcity:** Generate unlimited amounts of data for scenarios where real data is hard to obtain.
+2. **Bias Reduction:** Control data distribution to reduce biases present in real-world datasets.
+3. **Edge Cases:** Create data for rare or hazardous situations that are critical for robust robot operation.
+4. **Cost-Effectiveness:** Significantly reduce the cost and time associated with manual data collection and labeling.
 
 ### Key Capabilities of Omniverse Replicator
 
@@ -28,9 +28,9 @@ sidebar_position: 2
 
 For humanoid robots, Omniverse Replicator's ability to perform **large-scale domain randomization and automated ground-truth annotation** is a game-changer for robust AI perception. Humanoids operate in highly dynamic and unstructured environments, requiring perception systems that can generalize across vast variations. Replicator enables training data to be generated with:
 
-*   **Unseen Variations:** By randomizing visual parameters, AI models learn to ignore irrelevant details and focus on essential features, making them more resilient to real-world clutter and lighting changes.
-*   **Precise Labels:** Automated, pixel-perfect ground truth is virtually impossible to obtain manually for complex 3D scenes, but crucial for high-performance deep learning models.
-*   **"What-If" Scenarios:** Easily create data for failure modes or rare interactions, improving the robot's ability to perceive and react to unexpected events.
+* **Unseen Variations:** By randomizing visual parameters, AI models learn to ignore irrelevant details and focus on essential features, making them more resilient to real-world clutter and lighting changes.
+* **Precise Labels:** Automated, pixel-perfect ground truth is virtually impossible to obtain manually for complex 3D scenes, but crucial for high-performance deep learning models.
+* **"What-If" Scenarios:** Easily create data for failure modes or rare interactions, improving the robot's ability to perceive and react to unexpected events.
 
 This approach significantly reduces the data bottleneck, allowing for the rapid development and deployment of highly capable perception systems for humanoid robots.
 
@@ -61,6 +61,7 @@ curl -X POST "http://localhost:8000/synthetic-data-generation" \
 ```
 
 **Expected JSON Response (hypothetical, for Synthetic Data Generation):**
+
 ```json
 {
   "status": "Synthetic data generation job started",
