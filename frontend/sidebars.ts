@@ -1,78 +1,50 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
-/**
- * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
- */
 const sidebars: SidebarsConfig = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
   tutorialSidebar: [
     {
       type: 'category',
       label: '01 Introduction to Physical AI',
-      link: {type: 'doc', id: '01-introduction/index'},
+      link: {type: 'doc', id: 'introduction/index'},
       items: [
-        '01-introduction/01-foundations-of-physical-ai',
-        '01-introduction/02-embodied-intelligence',
-        '01-introduction/03-sensor-systems',
+        'introduction/foundations-of-physical-ai',
+        'introduction/embodied-intelligence',
+        'introduction/sensor-systems',
       ],
     },
     {
       type: 'category',
       label: '02 The Robotic Nervous System (ROS 2)',
-      link: {type: 'doc', id: '02-ros2-nervous-system/index'},
+      link: {type: 'doc', id: 'ros2-nervous-system/index'},
       items: [
-        '02-ros2-nervous-system/01-ros2-fundamentals',
-        '02-ros2-nervous-system/02-ros2-nodes-topics-services',
-        '02-ros2-nervous-system/03-ros2-actions-parameters',
+        'ros2-nervous-system/ros2-fundamentals',
+        'ros2-nervous-system/ros2-nodes-topics-services',
+        'ros2-nervous-system/ros2-actions-parameters',
       ],
     },
     {
       type: 'category',
       label: '03 The Digital Twin',
-      link: {type: 'doc', id: '03-digital-twin/index'}, // Placeholder for future index.md
+      link: {type: 'doc', id: 'digital-twin/index'},
       items: [
-        // Future Digital Twin lessons
+        'digital-twin/urdf-xacro',
+        'digital-twin/gazebo-simulation',
+        'digital-twin/unity-robotics',
       ],
     },
     {
       type: 'category',
       label: '04 The AI-Robot Brain (NVIDIA Isaac)',
-      link: {type: 'doc', id: '04-isaac-brain/index'}, // Placeholder for future index.md
-      items: [
-        // Future Isaac Brain lessons
-      ],
+      link: { type: 'doc', id: 'intro' }, 
+      items: [],
     },
     {
       type: 'category',
       label: '05 Vision-Language-Action & Capstone',
-      link: {type: 'doc', id: '05-vla-capstone/index'}, // Placeholder for future index.md
-      items: [
-        // Future VLA & Capstone lessons
-      ],
+      link: { type: 'doc', id: 'intro' }, 
+      items: [],
     },
   ],
-
-  // But you can create a sidebar manually
-  /*
-  tutorialSidebar: [
-    'intro',
-    'hello',
-    {
-      type: 'category',
-      label: 'Tutorial',
-      items: ['tutorial-basics/create-a-document'],
-    },
-  ],
-   */
 };
 
 export default sidebars;

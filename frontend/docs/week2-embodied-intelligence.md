@@ -75,6 +75,7 @@ curl -X GET "http://localhost:8000/embodied-intelligence"
 ```
 
 **Expected JSON Response (hypothetical, enriched):**
+
 ```json
 {
   "status": "ACTIVE",

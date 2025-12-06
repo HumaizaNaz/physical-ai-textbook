@@ -31,6 +31,18 @@ async def get_ros2_nodes_topics_services_status():
 async def get_ros2_actions_parameters_status():
     return {"status": "ROS 2 Actions and Parameters endpoint active!"}
 
+@app.get("/gazebo-simulation")
+async def get_gazebo_simulation_status():
+    return {"status": "Gazebo Simulation endpoint active!"}
+
+@app.get("/unity-robotics")
+async def get_unity_robotics_status():
+    return {"status": "Unity Robotics endpoint active!"}
+
+@app.get("/urdf-xacro-modeling")
+async def get_urdf_xacro_modeling_status():
+    return {"status": "URDF & XACRO Modeling endpoint active!"}
+
 
 if __name__ == "__main__":
     import uvicorn
