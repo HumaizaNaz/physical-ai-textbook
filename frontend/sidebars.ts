@@ -28,8 +28,6 @@ const sidebars: SidebarsConfig = {
       link: {type: 'doc', id: 'digital-twin/index'},
       items: [
         'digital-twin/urdf-xacro',
-        'digital-twin/gazebo-simulation',
-        'digital-twin/unity-robotics',
       ],
     },
     {
@@ -46,9 +44,15 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: '05 Vision-Language-Action & Capstone',
-      link: { type: 'doc', id: 'intro' }, 
-      items: [],
-    },
+      link: {type: 'doc', id: '05-vla-capstone/index'},
+      items: [
+        '05-vla-capstone/01-vla-fundamentals',
+        '05-vla-capstone/02-voice-to-action-pipeline',
+        '05-vla-capstone/03-openvla-rtx-and-helix',
+        '05-vla-capstone/04-full-vla-stack-integration',
+        '05-vla-capstone/05-capstone-autonomous-humanoid',
+      ],
+    }
   ],
 };
 
