@@ -11,32 +11,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Master The Robotics',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Build a rock-solid foundationin modren robotics.Dive deep into the Robotic Operation System (ROS 2) , explorng its powerful arcitecture for creating modular and scalable roboti behaviors
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Build & Test in the Metaverse',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+       create and validate complex robotic system in high-fidelity simulations .Learn to build digital twins using Gazebo and leverage the power of NVIDIA isaac Sim for realistic physics-based testing
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Deploy Intelligent Brains',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Go beyond simple automation integrate cutting edge AI into your robots,exploring Vision-Language Action (VLA) models thar allow for natural language interaction and complex task execution
       </>
     ),
   },

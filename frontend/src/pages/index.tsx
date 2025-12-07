@@ -16,12 +16,12 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">An open-source textbook on convergence of robotics,artificial intelligence and embodied cognition.Master ROS 2, Digital Twins and advanced Vision-language Action models to bring intelligent machines to life</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            Start Your Journey
           </Link>
         </div>
       </div>
