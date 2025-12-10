@@ -74,9 +74,9 @@ Do these things:
      - Combine context + query → Cohere generate (model: command-r-plus, prompt: "Answer based on this book content: [context]")
      - Output: {"answer": "response", "sources": [urls]}
 3. Use these credentials (keep secret):
-   Cohere API: BFa9b85rwbDFBCNBc6KwK6T49rblQMlEHPJdD0NV
-   Qdrant URL: https://01d95250-1a34-48b5-92f3-c69429d0c33a.us-east4-0.gcp.cloud.qdrant.io
-   Qdrant API: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.cdqyrawP2Z3LgTJdvwCqvd74g3ZiHyyjhyhu9hJRvWc
+   Cohere API:
+   Qdrant URL: 
+   Qdrant API: 
    Collection: book-rag
 
 4. Add uvicorn run command: uvicorn main:app --reload --port 8001
