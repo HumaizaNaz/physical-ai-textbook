@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # 01 Introduction to Physical AI
 
-![Module 01 Cover Image](https://i.imgur.com/your-image-here.png) <!-- Replace with actual image link -->
+![Module 01 Cover Image](/img/01-introduction.png)
 
 Welcome to **Module 01: Introduction to Physical AI**! This module lays the groundwork for understanding how artificial intelligence can manifest in the physical world through robotics. We will explore the fundamental concepts that bridge the gap between abstract AI algorithms and their tangible embodiment in machines. From the foundational principles of Physical AI to the intricate role of embodied intelligence and the essential sensor systems that enable robots to perceive their environment, this module sets the stage for our journey into humanoid robotics.
 

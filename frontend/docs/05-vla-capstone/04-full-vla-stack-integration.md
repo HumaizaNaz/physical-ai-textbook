@@ -153,14 +153,15 @@ print("Full VLA Stack Integration modules defined. Requires real-time sensor dat
 
 ```mermaid
 graph TD
-    A[Multiple Sensors (Camera, Mic, Depth, Proprio)] --> B(Sensor Fusion & Pre-processing)
-    B --> C{Multimodal Perception (VLM: OpenVLA/GPT-4o Vision)}
-    C -- Grounded Scene & Objects --> D{High-Level Planning & Reasoning (LLM: GPT-4o)}
-    D -- Symbolic Action Plan --> E[ROS 2 Bridge]
-    E -- Low-Level Commands --> F[Robot Actuators]
-    F --> G[Physical Environment]
-    G -- Sensory Feedback --> A
-    G -- Visual Feedback --> C
-    E -- Status & Feedback --> H[Human-Robot Interface (HRI)]
-    H -- New Commands/Clarifications --> D
+    A["Multiple Sensors (Camera, Mic, Depth, Proprio)"] --> B["Sensor Fusion & Pre-processing"]
+    B --> C{"Multimodal Perception (VLM: OpenVLA/GPT-4o Vision)"}
+    C -- "Grounded Scene & Objects" --> D{"High-Level Planning & Reasoning (LLM: GPT-4o)"}
+    D -- "Symbolic Action Plan" --> E["ROS 2 Bridge"]
+    E -- "Low-Level Commands" --> F["Robot Actuators"]
+    F --> G["Physical Environment"]
+    G -- "Sensory Feedback" --> A
+    G -- "Visual Feedback" --> C
+    E -- "Status & Feedback" --> H["Human-Robot Interface (HRI)"]
+    H -- "New Commands/Clarifications" --> D
+
 ```

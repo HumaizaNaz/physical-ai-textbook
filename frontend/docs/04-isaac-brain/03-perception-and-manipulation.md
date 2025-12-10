@@ -10,17 +10,17 @@ Effective **perception and manipulation** are critical capabilities for humanoid
 
 **Perception** in Isaac Sim involves simulating various sensors (e.g., RGB-D cameras, LiDAR, event cameras) to generate realistic data. This data is then used to train and validate AI models for tasks such as:
 
-*   **Object Detection and Tracking:** Identifying and following objects of interest.
-*   **3D Reconstruction:** Building detailed maps of the environment.
-*   **Pose Estimation:** Determining the precise position and orientation of objects and the robot itself.
-*   **Semantic Segmentation:** Classifying each pixel in an image to understand scene composition.
+* **Object Detection and Tracking:** Identifying and following objects of interest.
+* **3D Reconstruction:** Building detailed maps of the environment.
+* **Pose Estimation:** Determining the precise position and orientation of objects and the robot itself.
+* **Semantic Segmentation:** Classifying each pixel in an image to understand scene composition.
 
 **Manipulation** focuses on enabling robots to interact with objects and perform tasks (e.g., grasping, placing, assembly). Isaac Sim supports the development of manipulation skills by:
 
-*   **Accurate Kinematics and Dynamics:** Simulating robot arm movements, joint limits, and inverse kinematics.
-*   **Contact Physics:** Realistic interaction between robot end-effectors and objects.
-*   **Motion Planning:** Integrating path planning algorithms to avoid obstacles and reach target configurations.
-*   **Grasping Libraries:** Utilizing tools for robust grasp generation and execution.
+* **Accurate Kinematics and Dynamics:** Simulating robot arm movements, joint limits, and inverse kinematics.
+* **Contact Physics:** Realistic interaction between robot end-effectors and objects.
+* **Motion Planning:** Integrating path planning algorithms to avoid obstacles and reach target configurations.
+* **Grasping Libraries:** Utilizing tools for robust grasp generation and execution.
 
 Together, these capabilities allow for the iterative design and testing of perception-action loops essential for advanced humanoid tasks.
 
@@ -38,22 +38,22 @@ Together, these capabilities allow for the iterative design and testing of perce
 
 The tight integration of **high-fidelity sensor simulation with robust manipulation capabilities** within NVIDIA Isaac Sim is paramount for developing versatile humanoid robots. Unlike simpler simulators, Isaac Sim allows developers to:
 
-*   **Close the Perception-Action Loop:** Develop and test perception models directly with the manipulation capabilities, ensuring the robot can see what it needs to interact with and act accordingly.
-*   **Realistic Interaction:** The accurate physics engine (PhysX 5) provides real-world-like contact and friction, which is vital for stable grasping and dexterous manipulation.
-*   **Scalable Testing:** Test manipulation tasks under various conditions, object properties, and environmental layouts to ensure robustness before deployment to physical hardware.
-*   **Transfer Learning for Real Robots:** Policies trained with rich synthetic data and realistic physics in Isaac Sim have a higher chance of transferring successfully to real humanoid robots, reducing costly real-world experimentation.
+* **Close the Perception-Action Loop:** Develop and test perception models directly with the manipulation capabilities, ensuring the robot can see what it needs to interact with and act accordingly.
+* **Realistic Interaction:** The accurate physics engine (PhysX 5) provides real-world-like contact and friction, which is vital for stable grasping and dexterous manipulation.
+* **Scalable Testing:** Test manipulation tasks under various conditions, object properties, and environmental layouts to ensure robustness before deployment to physical hardware.
+* **Transfer Learning for Real Robots:** Policies trained with rich synthetic data and realistic physics in Isaac Sim have a higher chance of transferring successfully to real humanoid robots, reducing costly real-world experimentation.
 
 ```mermaid
 graph TD
-    A[Real-World Task Request] --> B{Isaac Sim: Scene Setup}
-    B --> C(Simulated Sensors)
-    C --> D[Perception Module (AI Model)]
-    D --> E{Object Pose/State}
-    E --> F[Manipulation Module (Motion Planning, Grasping)]
-    F --> G(Simulated Robot Actions)
-    G --> H[Physical Simulation Feedback]
-    H -- Iterate --> D
-    G -- Transfer --> I[Real Humanoid Robot]
+    A["Real-World Task Request"] --> B{"Isaac Sim: Scene Setup"}
+    B --> C["Simulated Sensors"]
+    C --> D["Perception Module (AI Model)"]
+    D --> E{"Object Pose/State"}
+    E --> F["Manipulation Module (Motion Planning, Grasping)"]
+    F --> G["Simulated Robot Actions"]
+    G --> H["Physical Simulation Feedback"]
+    H -- "Iterate" --> D
+    G -- "Transfer" --> I["Real Humanoid Robot"]
 ```
 
 ## 💬 Practice Exercise: "Ask your AI"

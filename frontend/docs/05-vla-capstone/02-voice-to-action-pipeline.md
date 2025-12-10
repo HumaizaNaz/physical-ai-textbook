@@ -133,13 +133,14 @@ print("Conceptual Voice-to-Action pipeline modules defined. Real implementation 
 
 ```mermaid
 graph TD
-    A[Human Voice] --> B{Speech-to-Text}
-    B --> C{Natural Language Understanding (LLM)}
-    C -- Understood Intent & Entities --> D[VLA Model (Visual Grounding)]
-    D -- Grounded Plan --> E[Action Planning]
-    E -- Low-level Commands --> F[ROS 2 Bridge]
-    F --> G[Robot Actuation]
-    G -- Physical Action --> H[Environment]
-    H -- Sensory Feedback --> I[Robot Sensors]
-    I -- Visual Data --> D
+    A["Human Voice"] --> B{"Speech-to-Text"}
+    B --> C{"Natural Language Understanding (LLM)"}
+    C -- "Understood Intent & Entities" --> D["VLA Model (Visual Grounding)"]
+    D -- "Grounded Plan" --> E["Action Planning"]
+    E -- "Low-level Commands" --> F["ROS 2 Bridge"]
+    F --> G["Robot Actuation"]
+    G -- "Physical Action" --> H["Environment"]
+    H -- "Sensory Feedback" --> I["Robot Sensors"]
+    I -- "Visual Data" --> D
+
 ```

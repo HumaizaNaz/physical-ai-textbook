@@ -41,6 +41,7 @@ curl -X POST "http://localhost:8000/vla/execute" \
 ```
 
 **Expected JSON Response (hypothetical, for VLA task execution):**
+
 ```json
 {
   "status": "Task received and processing",
@@ -133,14 +134,14 @@ print("Conceptual VLA pipeline ready for integration. Requires actual robot APIs
 
 ```mermaid
 graph TD
-    A[Human Voice Command] --> B{Speech-to-Text (Whisper/LLM)}
-    B --> C{Language Model (GPT-4o/Other LLM)}
-    C --> D{VLA Model: Intent Parsing}
-    D --> E{Robot Vision (OpenVLA/Other VLM)}
-    E --> F{VLA Model: Object Grounding}
-    F --> G{Action Planning & Control (ROS 2 Bridge)}
-    G --> H[Robot Actuation]
-    H --> I[Physical Environment]
-    I --> J[Robot Sensors (Vision, Proprioception)]
+    A["Human Voice Command"] --> B{"Speech-to-Text (Whisper/LLM)"}
+    B --> C{"Language Model (GPT-4o/Other LLM)"}
+    C --> D{"VLA Model: Intent Parsing"}
+    D --> E{"Robot Vision (OpenVLA/Other VLM)"}
+    E --> F{"VLA Model: Object Grounding"}
+    F --> G{"Action Planning & Control (ROS 2 Bridge)"}
+    G --> H["Robot Actuation"]
+    H --> I["Physical Environment"]
+    I --> J{"Robot Sensors (Vision, Proprioception)"}
     J --> E
 ```

@@ -10,10 +10,10 @@ sidebar_position: 4
 
 Isaac Lab enables researchers and engineers to:
 
-1.  **Massive Parallelism:** Simulate thousands of robot environments in parallel on a single GPU, dramatically accelerating the data collection and training process for RL algorithms.
-2.  **Flexible Environments:** Create custom robotic tasks and environments with configurable rewards, observations, and action spaces.
-3.  **Advanced Algorithms:** Supports integration with popular RL algorithms (e.g., PPO, SAC) and provides tools for policy learning, domain randomization, and sim-to-real transfer.
-4.  **Hardware-Accelerated Physics:** Leverages NVIDIA PhysX for accurate and fast physics simulation, crucial for realistic robot interactions and stable learning.
+1. **Massive Parallelism:** Simulate thousands of robot environments in parallel on a single GPU, dramatically accelerating the data collection and training process for RL algorithms.
+2. **Flexible Environments:** Create custom robotic tasks and environments with configurable rewards, observations, and action spaces.
+3. **Advanced Algorithms:** Supports integration with popular RL algorithms (e.g., PPO, SAC) and provides tools for policy learning, domain randomization, and sim-to-real transfer.
+4. **Hardware-Accelerated Physics:** Leverages NVIDIA PhysX for accurate and fast physics simulation, crucial for realistic robot interactions and stable learning.
 
 By abstracting away the complexities of simulation and providing a streamlined RL workflow, Isaac Lab empowers the training of highly intelligent and agile humanoid robot behaviors.
 
@@ -31,20 +31,20 @@ By abstracting away the complexities of simulation and providing a streamlined R
 
 The unparalleled **GPU-accelerated parallelism** offered by NVIDIA Isaac Lab is the single most transformative feature for training advanced reinforcement learning policies for humanoid robots. Humanoid control, such as dynamic locomotion, dexterous manipulation, and agile whole-body behaviors, requires an enormous amount of data and computational power. Isaac Lab addresses this by:
 
-*   **Accelerating Training:** Instead of training on a single simulation, hundreds or thousands of identical environments run concurrently, collecting experiences in parallel. This drastically reduces the time needed to converge on complex policies.
-*   **Enabling Complex Tasks:** The ability to rapidly explore vast state-action spaces makes it feasible to train for highly intricate and challenging tasks that would be intractable with traditional methods.
-*   **Robustness through Randomization:** Parallelism facilitates aggressive domain randomization, exposing the learning agent to a wide variety of conditions, leading to more robust policies that perform well in diverse real-world scenarios.
-*   **Cost-Effective Iteration:** Rapid experimentation in simulation minimizes reliance on expensive and time-consuming physical robot trials.
+* **Accelerating Training:** Instead of training on a single simulation, hundreds or thousands of identical environments run concurrently, collecting experiences in parallel. This drastically reduces the time needed to converge on complex policies.
+* **Enabling Complex Tasks:** The ability to rapidly explore vast state-action spaces makes it feasible to train for highly intricate and challenging tasks that would be intractable with traditional methods.
+* **Robustness through Randomization:** Parallelism facilitates aggressive domain randomization, exposing the learning agent to a wide variety of conditions, leading to more robust policies that perform well in diverse real-world scenarios.
+* **Cost-Effective Iteration:** Rapid experimentation in simulation minimizes reliance on expensive and time-consuming physical robot trials.
 
 ```mermaid
 graph TD
-    A[Complex Humanoid Task] --> B{Manual Programming Difficulty}
-    B --> C[NVIDIA Isaac Lab]
-    C --> D{Massive Parallel Simulation (GPU)}
-    D --> E{Rapid RL Policy Training}
-    E --> F[Robust & Adaptive Behaviors]
-    F --> G[Deploy to Isaac Sim/Real Robot]
-    G -- Real-world Performance --> A
+    A["Complex Humanoid Task"] --> B{"Manual Programming Difficulty"}
+    B --> C["NVIDIA Isaac Lab"]
+    C --> D{"Massive Parallel Simulation (GPU)"}
+    D --> E{"Rapid RL Policy Training"}
+    E --> F["Robust & Adaptive Behaviors"]
+    F --> G["Deploy to Isaac Sim/Real Robot"]
+    G -- "Real-world Performance" --> A
 ```
 
 ## 💬 Practice Exercise: "Ask your AI"

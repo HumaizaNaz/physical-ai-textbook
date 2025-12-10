@@ -11,29 +11,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Master The Robotics',
+    title: 'Master Physical AI',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Build a rock-solid foundationin modren robotics.Dive deep into the Robotic Operation System (ROS 2) , explorng its powerful arcitecture for creating modular and scalable roboti behaviors
+        Build a strong foundation in Physical AI and embodied intelligence. Learn how AI systems sense, understand, and act in the real world using ROS 2, sensors, and humanoid control architectures.
       </>
     ),
   },
   {
-    title: 'Build & Test in the Metaverse',
+    title: 'Simulate Humanoids in 3D Worlds',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-       create and validate complex robotic system in high-fidelity simulations .Learn to build digital twins using Gazebo and leverage the power of NVIDIA isaac Sim for realistic physics-based testing
+        Create high-fidelity digital twins using Gazebo and Unity. Simulate physics, collisions, LiDAR, depth cameras, and IMU sensors to test robots in realistic environments before deployment.
       </>
     ),
   },
   {
-    title: 'Deploy Intelligent Brains',
+    title: 'Build Intelligent Robot Brains',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Go beyond simple automation integrate cutting edge AI into your robots,exploring Vision-Language Action (VLA) models thar allow for natural language interaction and complex task execution
+        Integrate advanced AI using NVIDIA Isaac, VSLAM, and navigation systems. Combine Vision-Language-Action (VLA) models with ROS 2 to enable natural language commands, perception, and autonomous decision-making.
       </>
     ),
   },

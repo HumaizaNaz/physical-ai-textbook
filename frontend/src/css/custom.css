@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -6,25 +8,63 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2a9787;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #8A2BE2; /* Violet */
+  --ifm-color-primary-dark: #7721CC; /* Darker Violet */
+  --ifm-color-primary-darker: #641AAC; /* Even Darker Violet */
+  --ifm-color-primary-darkest: #4B0082; /* Indigo */
+  --ifm-color-primary-light: #9C41F4; /* Lighter Violet */
+  --ifm-color-primary-lighter: #AD61FF; /* Even Lighter Violet */
+  --ifm-color-primary-lightest: #E0B0FF; /* Mauve */
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-navbar-background-color: #663399; /* Rebecca Purple for light mode navbar */
+  --ifm-footer-background-color: #663399; /* Rebecca Purple for light mode footer */
 }
+
+/* Explicit rule for light mode footer background */
+.footer {
+  background-color: #663399; /* Rebecca Purple for light mode footer, matching navbar */
+}
+
+/* Apply Roboto Slab to navbar, footer, and all headings */
+.navbar__title,
+.navbar__item,
+.navbar__link,
+.footer__title,
+.footer__link-item,
+.footer__copyright,
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Slab', serif; /* Apply Roboto Slab */
+}
+
+/* Light mode navbar and footer font colors (white) */
+.navbar__title,
+.navbar__item,
+.navbar__link,
+.footer__title,
+.footer__link-item,
+.footer__copyright,
+a.menu__link { /* Added a.menu__link for sidebar links */
+  color: white;
+}
+
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #0f7666;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #DF73FF; /* Heliotrope */
+  --ifm-color-primary-dark: #C54B8C; /* Mulberry */
+  --ifm-color-primary-darker: #A810B0; /* Custom Darker */
+  --ifm-color-primary-darkest: #74027a; /* Custom Darkest */
+  --ifm-color-primary-light: #FF00FF; /* Magenta */
+  --ifm-color-primary-lighter: #FF33FF; /* Lighter Magenta */
+  --ifm-color-primary-lightest: #FF66FF; /* Even Lighter Magenta */
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-navbar-background-color: #C54B8C; /* Mulberry for dark mode navbar */
+  /* Keep --ifm-footer-background-color for other elements, but override for .footer below */
+}
+
+[data-theme='dark'] .footer {
+  background-color: #C54B8C; /* Magenta for dark mode footer */
 }

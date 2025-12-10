@@ -56,7 +56,8 @@ const sidebars: SidebarsConfig = {
         'vla-capstone/voice-to-action-pipeline',                   // ← fixed
         'vla-capstone/openvla-rtx-and-helix',                      // ← fixed
         'vla-capstone/full-vla-stack-integration',                // ← fixed
-        'vla-capstone/capstone-autonomous-humanoid',               // ← fixed
+        'vla-capstone/capstone-autonomous-humanoid', 
+        'vla-capstone/conversational-robotics',              // ← fixed
       ],
       collapsed: false,
     },

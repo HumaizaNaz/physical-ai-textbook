@@ -8,10 +8,10 @@ sidebar_position: 1
 
 **NVIDIA Isaac Sim** is a powerful, extensible, and physically accurate robotics simulation application built on the NVIDIA Omniverse platform. It provides a robust environment for developing, testing, and deploying AI-powered robots. Isaac Sim accelerates the entire robotics workflow, from design and training to deployment and operation. Its core strengths lie in its ability to:
 
-1.  **High-Fidelity Simulation:** Offers realistic physics, rendering, and sensor models essential for developing robust robot behaviors.
-2.  **Scalability:** Allows for simulating large-scale, complex environments with multiple robots, critical for fleet management and multi-robot coordination.
-3.  **Extensibility:** Built on USD (Universal Scene Description), enabling easy integration with other tools and workflows, and supporting custom robot models and environments.
-4.  **AI Integration:** Seamlessly integrates with NVIDIA's AI platforms and tools, including Isaac SDK, Isaac Lab, and Omniverse Replicator for synthetic data generation.
+1. **High-Fidelity Simulation:** Offers realistic physics, rendering, and sensor models essential for developing robust robot behaviors.
+2. **Scalability:** Allows for simulating large-scale, complex environments with multiple robots, critical for fleet management and multi-robot coordination.
+3. **Extensibility:** Built on USD (Universal Scene Description), enabling easy integration with other tools and workflows, and supporting custom robot models and environments.
+4. **AI Integration:** Seamlessly integrates with NVIDIA's AI platforms and tools, including Isaac SDK, Isaac Lab, and Omniverse Replicator for synthetic data generation.
 
 Isaac Sim is not just a simulator; it's a development hub for the entire robotics lifecycle, allowing engineers to iterate rapidly and train AI models in a safe, cost-effective virtual world.
 
@@ -29,21 +29,22 @@ Isaac Sim is not just a simulator; it's a development hub for the entire robotic
 
 The most significant advantage of NVIDIA Isaac Sim for humanoid robotics is its ability to create **physically accurate and photorealistic simulations** that are directly usable for AI model training. This capability addresses the critical "sim-to-real" gap by providing a high-fidelity virtual environment where AI policies learned in simulation can transfer more effectively to real-world robots. For humanoids, this means:
 
-*   **Safe Exploration:** Training complex and potentially dangerous behaviors (e.g., dynamic balancing, human interaction) in a risk-free virtual space.
-*   **Diverse Data Generation:** Automatically generating vast amounts of varied and labeled data (synthetic data) to overcome the scarcity and cost of real-world data collection.
-*   **Rapid Iteration:** Quickly test different robot designs, sensor configurations, and control algorithms without hardware constraints.
-*   **Reproducible Experiments:** Conduct perfectly repeatable experiments, crucial for debugging and validating AI models.
+* **Safe Exploration:** Training complex and potentially dangerous behaviors (e.g., dynamic balancing, human interaction) in a risk-free virtual space.
+* **Diverse Data Generation:** Automatically generating vast amounts of varied and labeled data (synthetic data) to overcome the scarcity and cost of real-world data collection.
+* **Rapid Iteration:** Quickly test different robot designs, sensor configurations, and control algorithms without hardware constraints.
+* **Reproducible Experiments:** Conduct perfectly repeatable experiments, crucial for debugging and validating AI models.
 
 ```mermaid
 graph TD
-    A[Robot Design (CAD)] --> B{USD Conversion}
-    B --> C[Isaac Sim Environment]
-    C --> D{Synthetic Data Generation}
-    D --> E[AI Model Training (e.g., RL)]
-    E --> F[Policy Deployment]
-    F --> G[Real-world Robot]
-    C -- Physically Accurate --> D
-    C -- Photorealistic --> D
+    A["Robot Design (CAD)"] --> B{"USD Conversion"}
+    B --> C["Isaac Sim Environment"]
+    C --> D{"Synthetic Data Generation"}
+    D --> E["AI Model Training (e.g., RL)"]
+    E --> F["Policy Deployment"]
+    F --> G["Real-world Robot"]
+    C -- "Physically Accurate" --> D
+    C -- "Photorealistic" --> D
+
 ```
 
 ## 💬 Practice Exercise: "Ask your AI"
@@ -59,6 +60,7 @@ curl -X GET "http://localhost:8000/isaac-sim-overview"
 ```
 
 **Expected JSON Response (hypothetical, for Isaac Sim status):**
+
 ```json
 {
   "status": "NVIDIA Isaac Sim Overview endpoint active!",

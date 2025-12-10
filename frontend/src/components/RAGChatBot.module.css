@@ -1,0 +1,239 @@
+.chatBubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #6a11cb, #2575fc); /* Purple-blue gradient */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.chatBubble:hover {
+  transform: scale(1.05);
+}
+
+.chatBubble svg {
+  width: 30px;
+  height: 30px;
+}
+
+.chatWindow {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  background-color: #ffffff; /* Explicitly set white for light mode */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.chatWindowOpen {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc); /* Purple-blue gradient */
+  color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: bold;
+}
+
+.chatHeader .closeButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.chatMessages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: var(--ifm-background-color);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.welcomeMessage {
+  text-align: center;
+  color: var(--ifm-color-emphasis-500);
+  margin-top: 20px;
+}
+
+.chatMessage {
+  background-color: var(--ifm-color-emphasis-100);
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  align-self: flex-start;
+  color: var(--ifm-font-color-base);
+}
+
+.userMessage {
+  background-color: #2575fc; /* Blue for user messages */
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.chatInputContainer {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.chatInput {
+  flex-grow: 1;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-right: 10px;
+  background-color: var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+}
+
+.chatInput:focus {
+  outline: none;
+  border-color: #6a11cb;
+  box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+}
+
+.sendButton {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loadingIndicator {
+  text-align: center;
+  padding: 10px;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.sources {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.sources ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sources li {
+  margin-bottom: 3px;
+}
+
+.sources a {
+  color: #2575fc; /* Blue for links */
+  text-decoration: none;
+}
+
+.sources a:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .chatWindow {
+  background-color: #282a36; /* Darker background for dark mode */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .chatMessage {
+  background-color: #44475a;
+  color: #f8f8f2;
+}
+
+[data-theme='dark'] .chatInput {
+  background-color: #383a59;
+  border-color: #6272a4;
+  color: #f8f8f2;
+}
+
+[data-theme='dark'] .chatInput:focus {
+  border-color: #bd93f9;
+  box-shadow: 0 0 0 2px rgba(189, 147, 249, 0.2);
+}
+
+[data-theme='dark'] .sources a {
+  color: #8be9fd; /* Lighter blue for links in dark mode */
+}
+
+.customContextMenuItem {
+  background-color: var(--ifm-background-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  color: var(--ifm-font-color-base) !important;
+  padding: 8px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  position: absolute !important;
+  z-index: 10000 !important; /* Higher than other elements */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+
+.customContextMenuItem:hover {
+  background-color: var(--ifm-hover-background-color) !important;
+}
+
+.contextPreview {
+  padding: 8px 15px;
+  font-size: 0.9em;
+  background-color: var(--ifm-color-info-background);
+  color: var(--ifm-color-info);
+  border-top: 1px solid var(--ifm-color-info-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clearContextButton {
+  background: none;
+  border: 1px solid var(--ifm-color-info);
+  color: var(--ifm-color-info);
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.clearContextButton:hover {
+  background-color: var(--ifm-color-info-background);
+}

@@ -10,10 +10,10 @@ The **Capstone: The Autonomous Humanoid** represents the ultimate culmination of
 
 Key theoretical pillars underpinning the autonomous humanoid include:
 
-1.  **Embodied General Intelligence**: Moving beyond narrow AI tasks to systems capable of performing a wide range of tasks, adapting to novel situations, and learning continuously in physical interaction. VLA models are a critical step towards this, enabling robots to interpret open-ended commands and generalize across tasks and environments.
-2.  **Robust Autonomy in Unstructured Environments**: Equipping robots with the ability to navigate, manipulate, and interact in dynamic, unpredictable spaces without constant human teleoperation. This requires sophisticated error detection, recovery mechanisms, and adaptive planning.
-3.  **Safe and Ethical Human-Robot Collaboration**: Designing systems that prioritize human safety, operate ethically, and foster trust through transparent behavior and effective human-robot interaction (HRI). This includes understanding social cues, anticipating human intent, and communicating effectively.
-4.  **Hardware-Software Co-Evolution**: Recognizing that advancements in robot hardware (e.g., dexterous manipulators, advanced sensors, energy-efficient actuators) go hand-in-hand with breakthroughs in AI software. The iterative design between physical form and intelligent function is key to achieving true humanoid autonomy.
+1. **Embodied General Intelligence**: Moving beyond narrow AI tasks to systems capable of performing a wide range of tasks, adapting to novel situations, and learning continuously in physical interaction. VLA models are a critical step towards this, enabling robots to interpret open-ended commands and generalize across tasks and environments.
+2. **Robust Autonomy in Unstructured Environments**: Equipping robots with the ability to navigate, manipulate, and interact in dynamic, unpredictable spaces without constant human teleoperation. This requires sophisticated error detection, recovery mechanisms, and adaptive planning.
+3. **Safe and Ethical Human-Robot Collaboration**: Designing systems that prioritize human safety, operate ethically, and foster trust through transparent behavior and effective human-robot interaction (HRI). This includes understanding social cues, anticipating human intent, and communicating effectively.
+4. **Hardware-Software Co-Evolution**: Recognizing that advancements in robot hardware (e.g., dexterous manipulators, advanced sensors, energy-efficient actuators) go hand-in-hand with breakthroughs in AI software. The iterative design between physical form and intelligent function is key to achieving true humanoid autonomy.
 
 The capstone project encourages you to envision and prototype a system that embodies these principles, pushing the boundaries of what humanoid robots can achieve.
 
@@ -59,14 +59,20 @@ curl -X POST "http://localhost:8000/capstone/humanoid-command" \
 
 ```mermaid
 graph TD
-    A[Capstone: The Autonomous Humanoid] --> B(Embodied General Intelligence)
-    A --> C(Robust Autonomy in Unstructured Environments)
-    A --> D(Safe and Ethical Human-Robot Collaboration)
-    A --> E(Hardware-Software Co-Evolution)
-    B & C & D & E -- Combined by --> F{Full VLA Stack Integration}
-    F -- Powers --> G[Humanoid Robot (Physical Embodiment)]
-    G -- Interacts with --> H[Complex Human Environments]
-    H -- Sensory Feedback --> F
+    A["Capstone: The Autonomous Humanoid"] --> B["Embodied General Intelligence"]
+    A --> C["Robust Autonomy in Unstructured Environments"]
+    A --> D["Safe and Ethical Human-Robot Collaboration"]
+    A --> E["Hardware-Software Co-Evolution"]
+    B --> F["Full VLA Stack Integration"]
+    C --> F
+    D --> F
+    E --> F
+    F --> G["Humanoid Robot (Physical Embodiment)"]
+    G --> H["Complex Human Environments"]
+    H --> F["Sensory Feedback"]
+    F -- "Powers" --> G
+    G -- "Interacts with" --> H
+
 ```
 
 <!-- YouTube Placeholder for Capstone Video -->

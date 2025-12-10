@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # 04 The AI-Robot Brain (NVIDIA Isaac™)
 
-![Module 04 Cover Image](https://i.imgur.com/your-isaac-brain-image-here.png) <!-- Replace with actual image link -->
+![Module 04 Cover Image](/img/04-isaac-brain.png) <!-- Replace with actual image link -->
 
 Welcome to **Module 04: The AI-Robot Brain (NVIDIA Isaac™)**! This module dives deep into the NVIDIA Isaac platform, a comprehensive suite of tools for accelerating the development and deployment of AI-powered robots. We will explore how Isaac Sim, a scalable and physically accurate robotics simulation application, and Isaac Lab, a framework for reinforcement learning, are used to train intelligent robots. This module focuses on the practical application of NVIDIA's cutting-edge technologies for synthetic data generation, advanced perception, manipulation, and reinforcement learning, crucial for building the next generation of humanoid robots.
 

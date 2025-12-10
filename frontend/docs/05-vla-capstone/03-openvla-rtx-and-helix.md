@@ -106,10 +106,10 @@ print(f"NVIDIA RTX GPUs are essential for accelerating training of VLA models du
 
 ```mermaid
 graph TD
-    A[OpenVLA Framework] -- Provides --> B(VLA Model Architectures)
-    B -- Requires --> C[NVIDIA RTX GPUs] -- Accelerates --> D{Training & Inference}
-    C -- Enables --> E[Project Helix Platform]
-    E -- Integrates --> B
-    E -- Provides Simulation & Deployment --> F[Humanoid Robots]
-    D -- Powers --> F
+    A["OpenVLA Framework"] -- "Provides" --> B["VLA Model Architectures"]
+    B -- "Requires" --> C["NVIDIA RTX GPUs"] -- "Accelerates" --> D{"Training & Inference"}
+    C -- "Enables" --> E["Project Helix Platform"]
+    E -- "Integrates" --> B
+    E -- "Provides Simulation & Deployment" --> F["Humanoid Robots"]
+    D -- "Powers" --> F
 ```

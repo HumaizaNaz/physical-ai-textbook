@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # 05 Vision-Language-Action Models & The Autonomous Humanoid
 
-![Module 05 Cover Image](https://i.imgur.com/vla-humanoid-hero.png) <!-- Dramatic hero image of a VLA-powered humanoid robot in action -->
+![Module 05 Cover Image](/img/ChatGPT%20Image%20Dec%209,%202025,%2008_23_31%20AM.png) <!-- Dramatic hero image of a VLA-powered humanoid robot in action -->
 
 Welcome to **Module 05: Vision-Language-Action Models & The Autonomous Humanoid**! This culminating module explores the fusion of cutting-edge AI with advanced robotics, focusing on how humanoid robots achieve true autonomy by understanding and acting upon human language instructions, bridging the gap between perception, cognition, and intelligent physical action. We will delve into the foundational principles of Vision-Language-Action (VLA) models, dissect the voice-to-action pipeline, explore state-of-the-art platforms like OpenVLA on NVIDIA RTX with Project Helix, and integrate the full VLA stack to envision the future of autonomous humanoids. This module synthesizes all knowledge gained throughout the textbook, empowering you to design, implement, and deploy sophisticated, human-centric robotic applications that truly understand their world.
 

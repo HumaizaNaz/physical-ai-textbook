@@ -8,7 +8,10 @@ const config: Config = {
   title: "Physical AI Textbook",
   tagline: "Dinosaurs are cool",
   favicon: "img/favicon.ico",
-
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
@@ -87,7 +90,7 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "tutorialSidebar",
           position: "left",
-          label: "Tutorial",
+          label: "Text Book",
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
@@ -104,8 +107,8 @@ const config: Config = {
           title: "Docs",
           items: [
             {
-              label: "Tutorial",
-              to: "/docs/intro",
+              label: "Text Book",
+              to: "/docs/introduction",
             },
           ],
         },
@@ -140,7 +143,8 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()}
+Physical AI Textbook`,
     },
     prism: {
       theme: prismThemes.github,
