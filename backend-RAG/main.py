@@ -8,7 +8,14 @@ import uvicorn
 import json
 import yaml
 from pathlib import Path
-import traceback # Import traceback for detailed error logging
+import traceback # Ensure this is at the top
+import sys       # Ensure this is at the top
+from dotenv import load_dotenv
+import os
+import re # For regex validation
+import ast # For Python code validation
+
+load_dotenv()
 
 app = FastAPI(title="Physical AI Textbook RAG Chatbot")
 
@@ -22,10 +29,18 @@ app.add_middleware(
 )
 
 # Credentials
-COHERE_API_KEY = "BFa9b85rwbDFBCNBc6KwK6T49rblQMlEHPJdD0NV"
-QDRANT_URL = "https://01d95250-1a34-48b5-92f3-c69429d0c33a.us-east4-0.gcp.cloud.qdrant.io"
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.cdqyrawP2Z3LgTJdvwCqvd74g3ZiHyyjhyhu9hJRvWc"
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 COLLECTION_NAME = "book-rag"
+
+# Ensure keys are loaded
+if not COHERE_API_KEY:
+    raise ValueError("COHERE_API_KEY not found in environment variables.")
+if not QDRANT_URL:
+    raise ValueError("QDRANT_URL not found in environment variables.")
+if not QDRANT_API_KEY:
+    raise ValueError("QDRANT_API_KEY not found in environment variables.")
 
 # Initialize clients with longer timeout
 cohere_client = CohereClient(COHERE_API_KEY)
@@ -104,6 +119,48 @@ class ChatResponse(BaseModel):
     answer: str
     sources: List[str] = []
 
+# --- Quiz Format Validation ---
+def validate_quiz_format(text: str) -> bool:
+    """
+    Validates if the text adheres to the expected MCQ format.
+    Checks for:
+    - At least one question number (e.g., "1.")
+    - At least one option (e.g., "a)")
+    - "Correct Answer:" presence
+    - "Explanation:" presence
+    """
+    has_question_number = bool(re.search(r"^\d+\.\s", text, re.MULTILINE))
+    has_option = bool(re.search(r"^[a-dA-D]\)", text, re.MULTILINE))
+    has_correct_answer = "Correct Answer:" in text
+    has_explanation = "Explanation:" in text
+    
+    return has_question_number and has_option and has_correct_answer and has_explanation
+
+# --- Python Code Validation ---
+def validate_python_code(code: str) -> Optional[str]:
+    """
+    Checks Python code for basic syntax errors.
+    Returns error message if invalid, None if valid.
+    """
+    try:
+        # Extract code if it's in a markdown block
+        code_match = re.search(r"```python\n(.*?)```", code, re.DOTALL)
+        if code_match:
+            code_to_check = code_match.group(1).strip()
+        else:
+            code_to_check = code.strip()
+
+        if not code_to_check:
+            return "No Python code found to validate."
+        
+        ast.parse(code_to_check)
+        return None # No syntax errors
+    except SyntaxError as e:
+        return f"Syntax Error: {e}"
+    except Exception as e:
+        return f"An unexpected error occurred during code validation: {e}"
+
+# --- FastAPI Endpoints ---
 @app.get("/")
 def home():
     return {"message": "Physical AI Textbook RAG API is LIVE!", "status": "ready"}
@@ -141,15 +198,13 @@ async def rag_chat(request: ChatRequest):
                     input_type="search_query"
                 ).embeddings[0]
 
-                # Search Qdrant using client.query
-                hits = qdrant_client.query(
+                # Search Qdrant using client.search (reverted to previous working method)
+                hits = qdrant_client.search(
                     collection_name=COLLECTION_NAME,
-                    query=models.Query(
-                        query_vector=emb,
-                        limit=4,
-                        score_threshold=0.7,
-                        with_payload=True
-                    )
+                    query_vector=emb,
+                    limit=4,
+                    score_threshold=0.7,
+                    with_payload=True
                 )
 
                 if hits:
@@ -183,43 +238,97 @@ async def rag_chat(request: ChatRequest):
         elif "lesson" in base_prompt_lower or "lesson" in question_lower:
             skill_name_triggered = "lesson-builder"
         
-        if skill_name_triggered and skill_name_triggered in SKILLS_CONFIG:
-            skill_used = SKILLS_CONFIG.get(skill_name_triggered)
-            if skill_used:
-                # Dynamically replace placeholder based on skill type
-                if "<TASK>" in skill_used["prompt"]:
-                    final_prompt_message = skill_used["prompt"].replace("<TASK>", request.question)
-                elif "<TEXT>" in skill_used["prompt"]:
-                    final_prompt_message = skill_used["prompt"].replace("<TEXT>", context if context != "No matching content found in the book." else request.question)
-                elif "<CONCEPT>" in skill_used["prompt"]:
-                    final_prompt_message = skill_used["prompt"].replace("<CONCEPT>", request.question)
-                
-                # Append output format instruction if available
-                if skill_used.get("output_format"):
-                    final_prompt_message += f"\n\nOutput in {skill_used['output_format']} format."
-            else: # Fallback if skill definition is somehow missing after lookup
-                 final_prompt_message = f"{base_prompt_instruction}\n\nBook Content:\n{context}\n\nQuestion: {request.question}"
-        else:
-            # Fallback to general RAG prompt if no specific skill is triggered or skill not found
-            final_prompt_message = f"{base_prompt_instruction}\n\nBook Content:\n{context}\n\nQuestion: {request.question}"
+        # --- Cohere Generation with Self-Correction ---
+        generated_answer = ""
+        final_sources = list(set(sources)) # Ensure sources are unique and ready
 
-        # Generate answer with Cohere
-        response = cohere_client.chat(
-            message=final_prompt_message,
-            model="command-r-plus", # Reverted to command-r-plus, as specified in earlier instructions
-            temperature=0.1,
-            max_tokens=600
-        )
+        retries = 0
+        MAX_RETRIES = 2
+        
+        while retries <= MAX_RETRIES:
+            if skill_name_triggered and skill_name_triggered in SKILLS_CONFIG:
+                skill_used = SKILLS_CONFIG.get(skill_name_triggered)
+                if skill_used:
+                    current_prompt_for_llm = ""
+                    # Dynamically replace placeholder based on skill type
+                    if "<TASK>" in skill_used["prompt"]:
+                        current_prompt_for_llm = skill_used["prompt"].replace("<TASK>", request.question)
+                    elif "<TEXT>" in skill_used["prompt"]:
+                        current_prompt_for_llm = skill_used["prompt"].replace("<TEXT>", context if context != "No matching content found in the book." else request.question)
+                    elif "<CONCEPT>" in skill_used["prompt"]:
+                        current_prompt_for_llm = skill_used["prompt"].replace("<CONCEPT>", request.question)
+                    
+                    # Append output format instruction if available
+                    if skill_used.get("output_format"):
+                        # Special handling for quiz-maker-robotics to make it very explicit
+                        if skill_name_triggered == "quiz-maker-robotics":
+                            correction_instruction = ""
+                            if retries > 0:
+                                correction_instruction = "\n\nCRITICAL: Your previous response did NOT meet the required quiz format. You MUST provide 4 MCQs formatted exactly as requested. Ensure each question has 4 options (a,b,c,d), a 'Correct Answer:' line, and an 'Explanation:' line. DO NOT deviate from this structure."
+                            
+                            current_prompt_for_llm = f"{{{skill_used['prompt'].replace('<TEXT>', context if context != 'No matching content found in the book.' else request.question)}}}{correction_instruction}\n\nPlease format the output as a numbered list of multiple-choice questions.\nFor each question:\n1.  Provide the question text.\n2.  List 4 options, labeled a), b), c), and d).\n3.  Clearly state the \"Correct Answer:\" followed by the letter and option.\n4.  Provide an \"Explanation:\" for the correct answer.\n\nExample Format:\n1. Question text?\n   a) Option A\n   b) Option B\n   c) Option C\n   d) Option D\nCorrect Answer: b) Option B\nExplanation: [Detailed explanation here]\n"
+                        elif skill_name_triggered == "robotics-code-generator":
+                            # For code generation, add self-correction instruction
+                            error_feedback = ""
+                            if retries > 0:
+                                error_feedback = "\n\nCRITICAL: Your previous code had the following error. Please fix it:\n" + generated_answer # generated_answer holds the previous error
+                            current_prompt_for_llm = f"{skill_used['prompt'].replace('<TASK>', request.question)}{error_feedback}" + "\n\nOutput ONLY the corrected code in a markdown block. Do NOT include any explanations outside the code block."
+                        else:
+                            current_prompt_for_llm += f"\n\nOutput in {skill_used['output_format']} format."
+                else: # Fallback if skill definition is somehow missing after lookup
+                    current_prompt_for_llm = f"{base_prompt_instruction}\n\nBook Content:\n{context}\n\nQuestion: {request.question}"
+            else:
+                # Fallback to general RAG prompt if no specific skill is triggered or skill not found
+                current_prompt_for_llm = f"{base_prompt_instruction}\n\nBook Content:\n{context}\n\nQuestion: {request.question}"
 
-        return ChatResponse(
-            answer=response.text.strip(),
-            sources=list(set(sources))  # Unique sources
-        )
+            # Generate answer with Cohere
+            response = cohere_client.chat(
+                message=current_prompt_for_llm,
+                model="command-r-08-2024", 
+                temperature=0.1,
+                max_tokens=1500
+            )
+            generated_answer = response.text.strip()
+
+            # --- Self-Correction Validation ---
+            if skill_name_triggered == "quiz-maker-robotics":
+                if validate_quiz_format(generated_answer):
+                    print(f"DEBUG: Quiz format validated successfully after {retries} retries.")
+                    return ChatResponse(answer=generated_answer, sources=final_sources)
+                else:
+                    print(f"DEBUG: Quiz format validation FAILED. Retrying... (Retry {retries + 1}/{MAX_RETRIES})")
+                    retries += 1
+                    # If retries are exhausted, break and return the last generated (failed) answer
+                    if retries > MAX_RETRIES:
+                        print("DEBUG: Max retries for quiz format exceeded.")
+                        break # Exit loop to return current (failed) answer
+                    # If retrying, generated_answer (from failed attempt) is used as feedback in next loop iteration
+            elif skill_name_triggered == "robotics-code-generator":
+                code_validation_error = validate_python_code(generated_answer)
+                if code_validation_error is None:
+                    print(f"DEBUG: Python code validated successfully after {retries} retries.")
+                    return ChatResponse(answer=generated_answer, sources=final_sources)
+                else:
+                    print(f"DEBUG: Python code validation FAILED: {code_validation_error}. Retrying... (Retry {retries + 1}/{MAX_RETRIES})")
+                    retries += 1
+                    # Prepare for retry: the generated_answer in this case is the code with syntax error,
+                    # so we prepend the error to the message for Cohere to fix it.
+                    current_prompt_for_llm += f"\n\nCRITICAL: Your previous code had the following error. Please fix it:\n{code_validation_error}\n\nPrevious Code:\n{generated_answer}\n\nOutput ONLY the corrected code in a markdown block. Do NOT include any explanations outside the code block."
+                    if retries > MAX_RETRIES:
+                        print("DEBUG: Max retries for code validation exceeded. Returning last attempt with error.")
+                        generated_answer = f"I tried to generate the code multiple times but encountered errors. Last attempt's error: {code_validation_error}\n\nPrevious Code:\n{generated_answer}"
+                        break
+            else:
+                # For non-quiz, non-code skills, no special format validation needed for now
+                return ChatResponse(answer=generated_answer, sources=final_sources)
+        
+        # If loop finishes (e.g., max retries for quiz or code), return the last generated answer (which might be an error msg)
+        return ChatResponse(answer=generated_answer, sources=final_sources)
 
     except Exception as e:
-        import traceback
+        import sys # Ensure sys is available
         print(f"ERROR in rag_chat: {e}")
-        traceback.print_exc()
+        print(f"DEBUG: Exception details: {sys.exc_info()}")
         raise HTTPException(status_code=500, detail=f"RAG error: {str(e)}")
 
 if __name__ == "__main__":

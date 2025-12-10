@@ -5,9 +5,12 @@
   width: 100%;
 }
 
-.featureSvg {
+.featureVideo {
   height: 200px;
-  width: 200px;
+  width: 100%; /* Make video responsive within its container */
+  max-width: 300px; /* Max width to prevent overly large videos */
+  border-radius: var(--ifm-border-radius);
+  object-fit: cover; /* Cover the area, cropping if necessary */
 }
 .footer {
   background-color: var(--ifm-footer-background-color) !important;

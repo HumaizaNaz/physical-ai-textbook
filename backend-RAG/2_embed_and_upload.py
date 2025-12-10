@@ -7,10 +7,18 @@ import time
 import os
 
 # === CONFIG ===
-COHERE_API_KEY = "BFa9b85rwbDFBCNBc6KwK6T49rblQMlEHPJdD0NV"
-QDRANT_URL = "https://01d95250-1a34-48b5-92f3-c69429d0c33a.us-east4-0.gcp.cloud.qdrant.io"
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.cdqyrawP2Z3LgTJdvwCqvd74g3ZiHyyjhyhu9hJRvWc"
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 COLLECTION_NAME = "book-rag"
+
+# Ensure keys are loaded
+if not COHERE_API_KEY:
+    raise ValueError("COHERE_API_KEY not found in environment variables.")
+if not QDRANT_URL:
+    raise ValueError("QDRANT_URL not found in environment variables.")
+if not QDRANT_API_KEY:
+    raise ValueError("QDRANT_API_KEY not found in environment variables.")
 INPUT_FILE = "backend-RAG/data/book_pages.json" # Adjusted from book_pages_playwright.json
 
 # Initialize clients

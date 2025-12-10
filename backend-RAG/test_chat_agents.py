@@ -73,7 +73,7 @@ if __name__ == "__main__":
         all_tests_passed = False
     
     # 5. Quiz Coach (should trigger quiz generation intent)
-    if not test_agent_query("quiz-coach", "Create a quiz about ROS 2 topics.", "question"):
+    if not test_agent_query("quiz-coach", "Create a quiz about ROS 2 topics.", "1. Which"):
         all_tests_passed = False
 
     # 6. Teaching Assistant with selected text (should ignore RAG and skills)

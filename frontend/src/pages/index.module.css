@@ -20,4 +20,87 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+}
+
+/* Custom styles for the new homepage layout */
+.homepageContainer {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  padding: 2rem 0;
+  gap: 2rem; /* Space between columns */
+}
+
+.leftColumn {
+  flex: 1; /* Take up equal space */
+  min-width: 0; /* Allow content to shrink */
+  padding: 1rem;
+}
+
+.rightColumn {
+  flex: 1; /* Take up equal space */
+  min-width: 0; /* Allow content to shrink */
+  padding: 1rem;
+  text-align: left; /* Align text to the left within the column */
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 996px) {
+  .homepageContainer {
+    flex-direction: column-reverse; /* Video goes below heading/text */
+    text-align: center;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+    padding: 1rem 0; /* Adjust padding for stacked view */
+    text-align: center;
+  }
+}
+
+/* Hero heading and subtitle - global override */
+:global(.hero__title) {
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+:global(.hero__subtitle) {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 500px;
+}
+
+/* Tablet screens */
+@media screen and (max-width: 1200px) {
+  :global(.hero__title) {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  :global(.hero__subtitle) {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+  }
+}
+
+/* Mobile screens */
+@media screen and (max-width: 768px) {
+  :global(.hero__title) {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+
+  :global(.hero__subtitle) {
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+    padding: 0 1rem;
+  }
+}
+
+/* Extra small phones */
+@media screen and (max-width: 480px) {
+  :global(.hero__title) {
+    font-size: 1.4rem;
+  }
+
+  :global(.hero__subtitle) {
+    font-size: 0.85rem;
+  }
 }

@@ -4,12 +4,15 @@ import time
 from typing import List, Dict, Any
 import cohere
 from qdrant_client import QdrantClient, models
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # --- Credentials (DO NOT PRINT) ---
-COHERE_API_KEY = "BFa9b85rwbDFBCNBc6KwK6T49rblQMlEHPJdD0NV"
-QDRANT_URL = "https://01d95250-1a34-48b5-92f3-c69429d0c33a.us-east4-0.gcp.cloud.qdrant.io"
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.cdqyrawP2Z3LgTJdvwCqvd74g3ZiHyyjhyhu9hJRvWc"
-QDRANT_COLLECTION_NAME = "book-rag"
+COHERE_API_KEY = os.environ.get("COHERE_API_KEY")
+QDRANT_URL = os.environ.get("QDRANT_URL")
+QDRANT_API_KEY = os.environ.get("QDRANT_API_KEY")
+QDRANT_COLLECTION_NAME = os.environ.get("COLLECTION_NAME", "book-rag")
 
 # --- Configuration ---
 CHUNK_SIZE = 400

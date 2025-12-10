@@ -1,0 +1,76 @@
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  height: 0;
+  overflow: hidden;
+  background-color: black;
+  border-radius: var(--ifm-border-radius);
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.videoPlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures video covers the area without distortion */
+  border-radius: var(--ifm-border-radius);
+}
+
+.controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 0 10px;
+}
+
+.controlButton {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: var(--ifm-border-radius);
+  transition: background-color 0.3s ease;
+}
+
+.controlButton:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.dot {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.activeDot {
+  background-color: white;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .carouselContainer {
+    padding-bottom: 75%; /* Adjust aspect ratio for mobile if needed, e.g., 4:3 */
+  }
+}
