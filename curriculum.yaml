@@ -1,0 +1,94 @@
+# curriculum.yaml
+# Defines the structure and content hierarchy for the Physical AI & Humanoid Robotics Textbook.
+
+curriculum:
+  - id: introduction
+    label: Introduction
+    chapters:
+      - title: Foundations of Physical AI
+        file: introduction/01-foundations-of-physical-ai.md
+      - title: Embodied Intelligence
+        file: introduction/02-embodied-intelligence.md
+      - title: Sensor Systems
+        file: introduction/03-sensor-systems.md
+      - title: Hardware Requirements
+        file: introduction/04-hardware-requirements.md # Placeholder
+      - title: Sim-to-Real Tips and Strategies
+        file: introduction/05-sim-to-real-tips.md # Placeholder
+      - title: Ethical Considerations in Human-Robot Interaction (HRI)
+        file: introduction/06-ethical-hri-safety.md # Placeholder
+
+  - id: module-1-ros2
+    label: Module 1: The Robotic Nervous System (ROS 2)
+    description: Learn the fundamentals of ROS 2 for robotic control and communication.
+    chapters:
+      - title: ROS 2 Architecture
+        file: module-1-ros2/01-ros2-architecture.md
+      - title: ROS 2 Nodes & Topics
+        file: module-1-ros2/02-nodes-topics.md
+      - title: ROS 2 Services & Actions
+        file: module-1-ros2/03-services-actions.md
+      - title: Building ROS 2 Packages with Python
+        file: module-1-ros2/04-building-ros2-packages-python.md
+      - title: Launch Files and Parameter Management
+        file: module-1-ros2/05-launch-files-parameters.md
+      - title: URDF for Humanoids
+        file: module-1-ros2/06-urdf-for-humanoids.md
+
+  - id: module-2-digital-twin
+    label: Module 2: The Digital Twin (Gazebo & Unity)
+    description: Explore robotics simulation with Gazebo and high-fidelity visualization with Unity.
+    chapters:
+      - title: Gazebo Setup
+        file: module-2-digital-twin/01-gazebo-setup.md
+      - title: URDF and SDF Robot Description Formats
+        file: module-2-digital-twin/02-urdf-sdf-formats.md
+      - title: Physics and Sensor Simulation
+        file: module-2-digital-twin/03-physics-sensor-simulation.md
+      - title: Unity for Robot Visualization
+        file: module-2-digital-twin/04-unity-visualization.md
+
+  - id: module-3-isaac
+    label: Module 3: The AI-Robot Brain (NVIDIA Isaac™)
+    description: Delve into NVIDIA Isaac Sim, Isaac ROS, and AI techniques for robotics.
+    chapters:
+      - title: Isaac SDK and Isaac Sim
+        file: module-3-isaac/01-isaac-sdk-isaac-sim.md
+      - title: AI-Powered Perception and Manipulation
+        file: module-3-isaac/02-ai-perception-manipulation.md
+      - title: Reinforcement Learning for Robot Control
+        file: module-3-isaac/03-reinforcement-learning-robot-control.md
+      - title: Sim-to-Real Transfer Techniques
+        file: module-3-isaac/04-sim-to-real-transfer.md
+
+  - id: module-4-vla
+    label: Module 4: Vision-Language-Action (VLA)
+    description: Integrate vision, language, and action for advanced humanoid robot control.
+    chapters:
+      - title: Humanoid Kinematics and Dynamics
+        file: module-4-vla/01-humanoid-kinematics-dynamics.md
+      - title: Bipedal Locomotion and Balance Control
+        file: module-4-vla/02-bipedal-locomotion-balance.md
+      - title: Manipulation and Grasping with Humanoid Hands
+        file: module-4-vla/03-manipulation-grasping.md
+      - title: Natural Human-Robot Interaction Design
+        file: module-4-vla/04-natural-human-robot-interaction.md
+      - title: GPT Models for Conversational AI in Robots
+        file: module-4-vla/05-gpt-conversational-ai.md
+      - title: Speech Recognition and Natural Language Understanding
+        file: module-4-vla/06-speech-recognition-nlu.md
+      - title: Multi-Modal Interaction: Speech, Gesture, Vision
+        file: module-4-vla/07-multi-modal-interaction.md
+      - title: Voice-to-Action with OpenAI Whisper
+        file: module-4-vla/08-voice-to-action-whisper.md
+      - title: Cognitive Planning with LLMs
+        file: module-4-vla/09-cognitive-planning-llms.md
+
+  - id: capstone
+    label: Capstone Project: The Autonomous Humanoid
+    description: A final project where a simulated robot receives a voice command, plans a path, navigates obstacles, identifies an object using computer vision, and manipulates it.
+    chapters:
+      - title: Capstone Project Overview
+        file: capstone/01-capstone-project-overview.md
+      - title: Capstone Project Rubric
+        file: capstone/02-capstone-rubric.md
