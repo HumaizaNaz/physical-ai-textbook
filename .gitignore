@@ -1,0 +1,25 @@
+# Node
+node_modules/
+.DS_Store
+
+# Docusaurus
+.docusaurus/
+build/
+
+# IDEs
+.vscode/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+*.egg-info/
