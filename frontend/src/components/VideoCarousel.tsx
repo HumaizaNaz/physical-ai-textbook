@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import styles from './VideoCarousel.module.css'; // For component-specific styles
 import clsx from 'clsx'; // For conditional class names
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Import useDocusaurusContext
 
-const videos = [
+const rawVideos = [ // Changed to rawVideos to store original paths
   '/videos/1.mp4',
   '/videos/2.mp4',
   '/videos/3.mp4',
 ];
 
 export default function VideoCarousel() {
+  const {siteConfig} = useDocusaurusContext(); // Get siteConfig from context
+  const baseUrl = siteConfig.baseUrl; // Extract baseUrl
+
+  const videos = rawVideos.map(videoPath => `${baseUrl}${videoPath.startsWith('/') ? videoPath.substring(1) : videoPath}`); // Prepend baseUrl
+
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const goToNext = () => {
@@ -52,3 +58,4 @@ export default function VideoCarousel() {
     </div>
   );
 }
+

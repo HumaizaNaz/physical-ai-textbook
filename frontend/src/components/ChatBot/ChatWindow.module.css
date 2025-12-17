@@ -1,0 +1,108 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.window {
+  background: var(--ifm-background-surface-color);
+  border-radius: 16px;
+  width: 380px;
+  max-width: 90%;
+  height: 500px;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+.header {
+  padding: 16px;
+  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  color: white;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.title {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+}
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  padding: 8px;
+  text-align: center;
+  font-size: 0.8em;
+  color: var(--ifm-color-emphasis-600);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .window {
+  background: var(--ifm-background-surface-color);
+}
+[data-theme='dark'] .header {
+  background: linear-gradient(90deg, var(--ifm-color-primary-dark) 0%, var(--ifm-color-primary) 100%);
+}
+[data-theme='dark'] .footer {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+/* Cursor animation for streaming messages */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .window {
+    width: 95%;
+    height: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .window {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .header {
+    border-radius: 0;
+  }
+}

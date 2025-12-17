@@ -29,7 +29,7 @@ function HomepageContent() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/introduction">
+            to="/docs/category/introduction">
             Start Your Journey
           </Link>
         </div>

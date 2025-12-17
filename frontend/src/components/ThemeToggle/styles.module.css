@@ -1,0 +1,95 @@
+/* frontend/src/components/ThemeToggle/styles.module.css */
+
+.themeToggle {
+  /* Base pill shape */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Example width */
+  height: 28px; /* Example height */
+  border-radius: 9999px; /* Pill shape */
+  background-color: var(--ifm-background-color); /* Matches current theme background */
+  border: 1px solid var(--ifm-color-gray-300); /* Subtle border */
+  cursor: pointer;
+  overflow: hidden; /* For glow and animation */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Subtle glow effect */
+.themeToggle:hover {
+  box-shadow: 0 0 8px 2px var(--ifm-color-primary); /* Accent color glow */
+}
+
+.iconContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sunIcon, .moonIcon {
+  position: absolute;
+  width: 20px; /* Icon size */
+  height: 20px; /* Icon size */
+  color: var(--ifm-color-primary); /* Accent color */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.sunIcon {
+  /* SVG or background image for sun icon */
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Ccircle cx="12" cy="12" r="5"/%3E%3Cline x1="12" y1="1" x2="12" y2="3"/%3E%3Cline x1="12" y1="21" x2="12" y2="23"/%3E%3Cline x1="4.22" y1="4.22" x2="5.64" y2="5.64"/%3E%3Cline x1="18.36" y1="18.36" x2="19.78" y2="19.78"/%3E%3Cline x1="1" y1="12" x2="3" y2="12"/%3E%3Cline x1="21" y1="12" x2="23" y2="12"/%3E%3Cline x1="4.22" y1="19.78" x2="5.64" y2="18.36"/%3E%3Cline x1="18.36" y1="5.64" x2="19.78" y2="4.22"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.moonIcon {
+  /* SVG or background image for moon icon */
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Theme specific styling */
+html[data-theme='dark'] .sunIcon {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+html[data-theme='light'] .moonIcon {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Orbiting ring animation for moon in dark mode */
+.orbitingRing {
+  position: absolute;
+  width: 20px; /* Same size as moon icon */
+  height: 20px; /* Same size as moon icon */
+  border: 1px solid var(--ifm-color-primary); /* Ring color */
+  border-radius: 50%;
+  animation: orbit 4s linear infinite; /* Animation definition */
+  box-shadow: 0 0 5px 1px var(--ifm-color-primary); /* Subtle glow */
+  opacity: 0; /* Hidden by default */
+  transform: scale(0); /* Start small */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+html[data-theme='dark'] .orbitingRing {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) scale(1); opacity: 1; }
+  25% { transform: rotate(90deg) scale(1.1); opacity: 0.8; }
+  50% { transform: rotate(180deg) scale(1); opacity: 1; }
+  75% { transform: rotate(270deg) scale(1.1); opacity: 0.8; }
+  100% { transform: rotate(360deg) scale(1); opacity: 1; }
+}
+
+/* Adjust button padding/margin if necessary */
+.navbar-sidebar__toggle {
+  margin-left: var(--ifm-spacing-md); /* Adjust as needed */
+}

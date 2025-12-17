@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap'); /* Added Urdu font */
-
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -9,324 +6,66 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #8A2BE2; /* Violet */
-  --ifm-color-primary-dark: #7721CC; /* Darker Violet */
-  --ifm-color-primary-darker: #641AAC; /* Even Darker Violet */
-  --ifm-color-primary-darkest: #4B0082; /* Indigo */
-  --ifm-color-primary-light: #9C41F4; /* Lighter Violet */
-  --ifm-color-primary-lighter: #AD61FF; /* Even Lighter Violet */
-  --ifm-color-primary-lightest: #E0B0FF; /* Mauve */
+  --ifm-color-primary: #0284c7; /* Accent blue */
+  --ifm-color-primary-dark: #0268a0; /* Calculated for consistency */
+  --ifm-color-primary-darker: #014c77; /* Calculated for consistency */
+  --ifm-color-primary-darkest: #01385c; /* Calculated for consistency */
+  --ifm-color-primary-light: #06b6d4; /* Calculated for consistency */
+  --ifm-color-primary-lighter: #38bdf8; /* Calculated for consistency */
+  --ifm-color-primary-lightest: #7dd3fc; /* Calculated for consistency */
+
+  --ifm-background-color: #f8fafc; /* Light mode background */
+  --ifm-background-surface-color: #ffffff; /* Cards/Surfaces */
+  --ifm-font-color-base: #1e293b; /* Main text color */
+  --ifm-navbar-background-color: #E5F3FD; /* Explicitly white for light mode navbar */
+ 
+  --ifm-color-footer-text: var(--ifm-font-color-base); /* Main text color */
+  --ifm-color-footer-link: var(--ifm-color-primary); /* Accent color */
+
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
-  --ifm-navbar-background-color: #663399; /* Rebecca Purple for light mode navbar */
-  --ifm-footer-background-color: #663399; /* Rebecca Purple for light mode footer */
 }
-
-/* Explicit rule for light mode footer background */
 .footer {
-  background-color: #663399; /* Rebecca Purple for light mode footer, matching navbar */
+  background-color: #E5F3FD;; /* Rebecca Purple for light mode footer, matching navbar */
 }
-
-/* Apply Roboto Slab to navbar, footer, and all headings */
-.navbar__title,
-.navbar__item,
-.navbar__link,
-.footer__title,
-.footer__link-item,
-.footer__copyright,
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto Slab', serif; /* Apply Roboto Slab */
-}
-
-/* Light mode navbar and footer font colors (white) */
-.navbar__title,
-.navbar__item,
-.navbar__link,
-.footer__title,
-.footer__link-item,
-.footer__copyright,
-a.menu__link { /* Added a.menu__link for sidebar links */
-  color: white;
-}
-
-
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #DF73FF; /* Heliotrope */
-  --ifm-color-primary-dark: #C54B8C; /* Mulberry */
-  --ifm-color-primary-darker: #A810B0; /* Custom Darker */
-  --ifm-color-primary-light: #FF00FF; /* Magenta */
-  --ifm-color-primary-lighter: #FF33FF; /* Lighter Magenta */
-  --ifm-color-primary-lightest: #FF66FF; /* Even Lighter Magenta */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #0ea5e9; /* Accent blue */
+  --ifm-color-primary-dark: #0284c7; /* Darker accent blue (using light mode accent as dark primary-dark equivalent) */
+  --ifm-color-primary-darker: #0268a0; /* Calculated for consistency */
+  --ifm-color-primary-darkest: #014c77; /* Calculated for consistency */
+  --ifm-color-primary-light: #38bdf8; /* Calculated for consistency */
+  --ifm-color-primary-lighter: #7dd3fc; /* Calculated for consistency */
+  --ifm-color-primary-lightest: #bae6fd; /* Calculated for consistency */
 
-  --ifm-navbar-background-color: #C54B8C; /* Mulberry for dark mode navbar */
-  /* Keep --ifm-footer-background-color for other elements, but override for .footer below */
+  --ifm-background-color: #0f172a; /* Dark mode background */
+  --ifm-background-surface-color: #1e293b; /* Cards/Surfaces */
+  --ifm-font-color-base: #e2e8f0; /* Main text color */
+  --ifm-font-color-secondary: #94a3b8; /* Secondary text color (calculated as a suitable gray) */
+
+  --ifm-navbar-background-color: #1e293b; /* Dark mode navbar background */
+  
+  --ifm-color-footer-text: var(--ifm-font-color-base); /* Main text color */
+  --ifm-color-footer-link: var(--ifm-color-primary); /* Accent color */
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
 
 [data-theme='dark'] .footer {
-  background-color: #C54B8C; /* Magenta for dark mode footer */
+  background-color: #1e293b; /* Magenta for dark mode footer */
+}
+html[data-theme] {
+  transition:
+    background-color var(--ifm-transition-fast) ease,
+    color var(--ifm-transition-fast) ease;
 }
 
-/* --- RAGChatBot Styles --- */
-.chatBubble {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(45deg, #6a11cb, #2575fc); /* Purple-blue gradient */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-  z-index: 1000;
+/* Add subtle shadows for visual lift in light mode */
+html[data-theme='light'] .navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Light shadow */
 }
 
-.chatBubble:hover {
-  transform: scale(1.05);
-}
-
-.chatBubble svg {
-  width: 30px;
-  height: 30px;
-}
-
-.chatWindow {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  width: 350px;
-  height: 500px;
-  background-color: #ffffff; /* Explicitly set white for light mode */
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  transform: translateY(100%) scale(0.9);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease-in-out;
-  z-index: 999;
-}
-
-.chatWindowOpen {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-  pointer-events: all;
-}
-
-.chatHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  background: linear-gradient(90deg, #6a11cb, #2575fc); /* Purple-blue gradient */
-  color: white;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  font-weight: bold;
-}
-
-.chatHeader .closeButton {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.chatMessages {
-  flex-grow: 1;
-  padding: 15px;
-  overflow-y: auto;
-  background-color: var(--ifm-background-color);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-
-.welcomeMessage {
-  text-align: center;
-  color: var(--ifm-color-emphasis-500);
-  margin-top: 20px;
-}
-
-.chatMessage {
-  background-color: var(--ifm-color-emphasis-100);
-  padding: 10px 12px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  max-width: 80%;
-  align-self: flex-start;
-  color: var(--ifm-font-color-base);
-}
-
-.userMessage {
-  background-color: #2575fc; /* Blue for user messages */
-  color: white;
-  align-self: flex-end;
-  margin-left: auto;
-}
-
-.chatInputContainer {
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid var(--ifm-color-emphasis-300);
-}
-
-.chatInput {
-  flex-grow: 1;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 20px;
-  padding: 8px 15px;
-  margin-right: 10px;
-  background-color: var(--ifm-color-emphasis-100);
-  color: var(--ifm-font-color-base);
-}
-
-.chatInput:focus {
-  outline: none;
-  border-color: #6a11cb;
-  box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
-}
-
-.sendButton {
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  border: none;
-  border-radius: 20px;
-  color: white;
-  padding: 8px 15px;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-.sendButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.loadingIndicator {
-  text-align: center;
-  padding: 10px;
-  color: var(--ifm-color-emphasis-600);
-}
-
-.sources {
-  font-size: 0.8em;
-  margin-top: 5px;
-  color: var(--ifm-color-emphasis-700);
-}
-
-.sources ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.sources li {
-  margin-bottom: 3px;
-}
-
-.sources a {
-  color: #2575fc; /* Blue for links */
-  text-decoration: none;
-}
-
-.sources a:hover {
-  text-decoration: underline;
-}
-
-/* Dark mode adjustments */
-[data-theme='dark'] .chatWindow {
-  background-color: #282a36; /* Darker background for dark mode */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme='dark'] .chatMessage {
-  background-color: #44475a;
-  color: #f8f8f2;
-}
-
-[data-theme='dark'] .chatInput {
-  background-color: #383a59;
-  border-color: #6272a4;
-  color: #f8f8f2;
-}
-
-[data-theme='dark'] .chatInput:focus {
-  border-color: #bd93f9;
-  box-shadow: 0 0 0 2px rgba(189, 147, 249, 0.2);
-}
-
-[data-theme='dark'] .sources a {
-  color: #8be9fd; /* Lighter blue for links in dark mode */
-}
-
-.customContextMenuItem {
-  background-color: var(--ifm-background-color) !important;
-  border: 1px solid var(--ifm-color-emphasis-300) !important;
-  color: var(--ifm-font-color-base) !important;
-  padding: 8px !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  position: absolute !important;
-  z-index: 10000 !important; /* Higher than other elements */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  white-space: nowrap;
-}
-
-.customContextMenuItem:hover {
-  background-color: var(--ifm-hover-background-color) !important;
-}
-
-.contextPreview {
-  padding: 8px 15px;
-  font-size: 0.9em;
-  background-color: var(--ifm-color-info-background);
-  color: var(--ifm-color-info);
-  border-top: 1px solid var(--ifm-color-info-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.clearContextButton {
-  background: none;
-  border: 1px solid var(--ifm-color-info);
-  color: var(--ifm-color-info);
-  padding: 3px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8em;
-  margin-left: 10px;
-}
-
-.clearContextButton:hover {
-  background-color: var(--ifm-color-info-background);
-}
-
-/* --- Sidebar styling for light mode --- */
-/* Target the main sidebar container */
-/* Using more specific selectors and !important to override Infima defaults */
-:root .theme-doc-sidebar-menu,
-:root .theme-doc-sidebar-container {
-  background-color: var(--ifm-navbar-background-color) !important; /* Apply navbar color in light mode */
-  filter: brightness(1.1); /* Make it slightly lighter */
-  color: white !important; /* Ensure text is visible */
-}
-
-/* Ensure links also have white color for contrast */
-:root .menu__link {
-  color: white !important;
-}
-:root .menu__link:hover {
-  color: rgba(255, 255, 255, 0.8) !important; /* Slightly lighter on hover */
-}
-:root .menu__link--active {
-  color: var(--ifm-color-primary-lightest) !important; /* Highlight active link */
+html[data-theme='light'] .footer {
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.03); /* Light shadow for footer */
 }

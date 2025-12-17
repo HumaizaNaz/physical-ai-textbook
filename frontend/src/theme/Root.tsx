@@ -1,16 +1,19 @@
-import React from 'react';
-import type { PropsWithChildren } from 'react';
-import RAGChatBot from '@site/src/components/RAGChatBot';
-import UrduTranslateButton from '@site/src/components/UrduTranslateButton'; // Import the new component
-import { JSX } from 'react';
+// frontend/src/theme/Root.tsx
+import React, { ReactNode } from 'react';
+// Update import path to .tsx
+import ChatBot from '../components/ChatBot/index';
 
-// Default implementation, that you might want to customize
-export default function Root({ children }: PropsWithChildren): JSX.Element {
+interface RootProps {
+  children?: ReactNode;
+}
+
+const Root: React.FC<RootProps> = ({ children }) => {
   return (
     <>
       {children}
-      <RAGChatBot />
-
+      <ChatBot />
     </>
   );
-}
+};
+
+export default Root;
