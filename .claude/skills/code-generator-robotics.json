@@ -1,8 +1,0 @@
-{
-  "name": "code-generator-robotics",
-  "description": "Generates runnable ROS2/Gazebo/Isaac code for Physical AI tasks",
-  "prompt": "Generate clean Python/ROS2 code for this robotics task. Include imports, comments, error handling:\n\n<TASK>\n\nOutput only code in markdown block.",
-  "output_format": "markdown code block",
-  "example_input": "ROS2 node for sensor publishing",
-  "example_output": "```python\nimport rclpy\n# Full working code...```"
-}

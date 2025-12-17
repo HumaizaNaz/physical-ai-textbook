@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+cohere
+qdrant-client
+python-dotenv
+trafilatura
+playwright
+requests
+beautifulsoup4
