@@ -1,35 +1,51 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+:root {
+  /* Chatbot specific colors - Emerald Green/Teal contrast */
+  --chatbot-primary: #008080;   /* Teal */
+  --chatbot-primary-dark: #005f5f; /* Darker Teal */
+  --chatbot-primary-light: #40c0c0; /* Lighter Teal */
+  --chatbot-accent: #008080;   /* Matching primary */
+  --chatbot-bg-light: #ffffff; /* Chat window background in light mode */
+  --chatbot-text-light: #333333; /* Text color in light mode */
 }
+
+[data-theme='dark'] {
+  --chatbot-bg-dark: #2c3e50;   /* Chat window background in dark mode (dark blue-gray) */
+  --chatbot-text-dark: #ecf0f1; /* Text color in dark mode (light gray) */
+}
+
 .window {
-  background: var(--ifm-background-surface-color);
+  position: fixed; /* Fixed position for bottom-right */
+  bottom: 20px;
+  right: 20px;
+  background: var(--chatbot-bg-light); /* Use chatbot specific background */
   border-radius: 16px;
-  width: 380px;
-  max-width: 90%;
-  height: 500px;
-  max-height: 90%;
+  width: 380px; /* Fixed width for chat window */
+  height: 500px; /* Fixed height for chat window */
   display: flex;
   flex-direction: column;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Ensure it's above other content */
 }
+
+[data-theme='dark'] .window {
+  background: var(--chatbot-bg-dark); /* Dark mode background */
+}
+
 .header {
   padding: 16px;
-  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  background: linear-gradient(90deg, var(--chatbot-primary) 0%, var(--chatbot-primary-light) 100%);
   color: white;
   border-radius: 16px 16px 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+/* Dark mode header background for contrast */
+[data-theme='dark'] .header {
+  background: linear-gradient(90deg, var(--chatbot-primary-dark) 0%, var(--chatbot-primary) 100%);
+}
+
 .headerLeft {
   display: flex;
   align-items: center;
@@ -60,24 +76,24 @@
   -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
   display: flex;
   flex-direction: column;
+  color: var(--chatbot-text-light); /* Use chatbot specific text color */
 }
+
+[data-theme='dark'] .messages {
+  color: var(--chatbot-text-dark); /* Dark mode text color */
+}
+
 .footer {
   padding: 8px;
   text-align: center;
   font-size: 0.8em;
-  color: var(--ifm-color-emphasis-600);
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--chatbot-text-light); /* Use chatbot specific text color */
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Lighter border for contrast */
 }
 
-/* Dark mode adjustments */
-[data-theme='dark'] .window {
-  background: var(--ifm-background-surface-color);
-}
-[data-theme='dark'] .header {
-  background: linear-gradient(90deg, var(--ifm-color-primary-dark) 0%, var(--ifm-color-primary) 100%);
-}
 [data-theme='dark'] .footer {
-  border-color: var(--ifm-color-emphasis-400);
+  color: var(--chatbot-text-dark); /* Dark mode text color */
+  border-color: rgba(255, 255, 255, 0.1); /* Dark mode border color */
 }
 
 /* Cursor animation for streaming messages */
@@ -93,6 +109,8 @@
   .window {
     width: 95%;
     height: 95%;
+    bottom: 2.5%; /* Adjust for mobile centering if needed */
+    right: 2.5%; /* Adjust for mobile centering if needed */
   }
 }
 
@@ -100,6 +118,8 @@
   .window {
     width: 100%;
     height: 100%;
+    bottom: 0;
+    right: 0;
     border-radius: 0;
   }
   .header {

@@ -25,12 +25,11 @@ export default function ChatWindow({ onClose, messages, onSendMessage, loading }
   }, [messages]);
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.window} onClick={e => e.stopPropagation()}>
+    <div className={styles.window} onClick={e => e.stopPropagation()}>
         <div className={styles.header}>
           <div className={styles.headerLeft}>
             <h3 className={styles.title}>Physical AI Assistant</h3>
-            <span className={styles.badge}>🤖</span>
+            <span className={styles.badge}>👩‍💻</span>
           </div>
           <button className={styles.closeButton} onClick={onClose}>✕</button>
         </div>
@@ -44,6 +43,6 @@ export default function ChatWindow({ onClose, messages, onSendMessage, loading }
           <p className={styles.footerText}>Powered by Cohere RAG</p>
         </div>
       </div>
-    </div>
+
   );
 }

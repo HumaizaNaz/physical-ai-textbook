@@ -13,5 +13,6 @@ dependencies = [
     "qdrant-client>=1.16.2",
     "requests>=2.32.5",
     "trafilatura>=2.0.0",
-    "uvicorn>=0.38.0",
+    "uvicorn>=0.38.0", # Added fastembed dependency
+    "fastembed>=0.2.0",
 ]

@@ -38,17 +38,17 @@
 .featureCard {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Ensure card takes full height of its flex item */
+  /* height: 100%; Removed, letting flex grow handle it */
   padding: 1.25rem;
   border-radius: 18px;
   transition: all 0.35s ease;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   margin: 0.75rem; /* Margin around cards for spacing, default for all sizes */
-  /* flex-basis and flex-shrink will be defined in media queries */
   flex-basis: 100%; /* Default to full width for mobile */
   flex-shrink: 0; /* Prevent shrinking below basis */
   min-width: 280px; /* Minimum width for mobile cards */
   max-width: 400px; /* Max width for mobile cards when stacking, for better appearance */
+  /* min-height: 400px; Removed, relying on align-items: stretch */
 }
 
 /* =========================
@@ -82,6 +82,17 @@ html[data-theme='dark'] .featureCard {
 }
 
 /* =========================
+   FEATURE CONTENT CONTAINER
+   ========================= */
+.featureContent {
+  flex-grow: 1; /* Allow this section to take up available vertical space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space between title and description */
+}
+
+
+/* =========================
    TEXT
    ========================= */
 .featureCard h3 {
@@ -96,7 +107,9 @@ html[data-theme='dark'] .featureCard {
   line-height: 1.55;
   opacity: 0.9;
   text-align: center;
-  flex-grow: 1;
+  flex-grow: 1; /* Allow paragraph to grow */
+  /* Removed max-height and overflow-y: auto */
+  /* Removed padding-right and padding-left */
 }
 
 .featureCard::after {
@@ -116,19 +129,14 @@ html[data-theme='dark'] .featureCard {
    ========================= */
 @media screen and (min-width: 768px) {
   .featureCardsContainer {
-    overflow-x: auto; /* Re-enable horizontal scrolling for larger screens */
+    /* Removed overflow-x: auto and scrollbar hiding */
     padding-bottom: 1rem;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .featureCardsContainer::-webkit-scrollbar {
-      display: none;
   }
 
   .featureCardsRow {
-    flex-wrap: nowrap; /* Force cards into a single line for larger screens */
-    justify-content: flex-start; /* Align to start */
+    flex-wrap: wrap; /* Allow cards to wrap again */
+    justify-content: center; /* Center cards in rows */
     margin: 0 -0.75rem; /* Counteract margin on individual cards for full width */
   }
 

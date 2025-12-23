@@ -57,7 +57,7 @@ function Feature({title, videoSrc, description}: FeatureItem) {
         </video>
       </div>
 
-      <div className="padding-horiz--md">
+      <div className={clsx("padding-horiz--md", styles.featureContent)}>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>

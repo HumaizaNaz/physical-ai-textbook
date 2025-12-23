@@ -1,0 +1,257 @@
+/* frontend/src/css/UrduTranslate.css */
+
+/* Chatbot specific colors - Emerald Green/Teal contrast (duplicated from ChatWindow.module.css for consistency) */
+/* Ideally these would be global, but for self-containment, defining here */
+:root {
+  --chatbot-primary: #008080;   /* Teal */
+  --chatbot-primary-dark: #005f5f; /* Darker Teal */
+  --chatbot-primary-light: #40c0c0; /* Lighter Teal */
+  --chatbot-accent: #008080;   /* Matching primary */
+  --chatbot-bg-light: #ffffff; /* Chat window background in light mode */
+  --chatbot-text-light: #333333; /* Text color in light mode */
+  --chatbot-border-color: rgba(0, 0, 0, 0.1);
+  --chatbot-input-bg: #f9f9f9;
+}
+
+[data-theme='dark'] {
+  --chatbot-bg-dark: #2c3e50;   /* Chat window background in dark mode (dark blue-gray) */
+  --chatbot-text-dark: #ecf0f1; /* Text color in dark mode (light gray) */
+  --chatbot-border-color-dark: rgba(255, 255, 255, 0.1);
+  --chatbot-input-bg-dark: #3a475a;
+}
+
+/* Button Styling */
+.urduTranslateButton {
+  background: linear-gradient(
+    to right,
+    var(--chatbot-primary),
+    var(--chatbot-primary-light)
+  );
+  border: none;
+  color: white; /* Icon and text color */
+  padding: 10px; /* Adjust padding for icon-only state */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Center icon when text is hidden */
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Initial shadow */
+  width: 50px; /* Fixed width for icon-only state */
+  overflow: hidden; /* Hide overflowing text */
+  white-space: nowrap;
+}
+
+.urduTranslateButton:hover {
+  transform: scale(1.05); /* Slight scale on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  width: 180px; /* Expand width on hover to reveal text */
+  justify-content: flex-start; /* Align icon and text to start */
+  padding: 10px 15px; /* Adjust padding for expanded state */
+}
+
+/* Dark mode button background */
+[data-theme='dark'] .urduTranslateButton {
+  background: linear-gradient(
+    to right,
+    var(--chatbot-primary-dark),
+    var(--chatbot-primary)
+  );
+}
+
+.urduTranslateButton .icon {
+  margin-right: 0; /* No margin right when icon-only */
+  transition: margin-right 0.2s ease-in-out;
+  display: flex; /* To center the SVG icon */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for the SVG book icon */
+.svgBookIcon {
+  width: 28px; /* Size the SVG to match font-size of '✕' in chatbot button */
+  height: 28px;
+  color: inherit; /* Inherit color from parent .icon */
+}
+
+
+.urduTranslateButton:hover .icon {
+  margin-right: 8px; /* Add margin right when text appears */
+}
+
+.urduTranslateButton .text {
+  opacity: 0; /* Hide text by default */
+  width: 0; /* Collapse text width by default */
+  transition: opacity 0.2s ease-in-out, width 0.2s ease-in-out;
+}
+
+.urduTranslateButton:hover .text {
+  opacity: 1; /* Show text on hover */
+  width: auto; /* Expand text width on hover */
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Dark backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Ensure it's on top of everything */
+  padding: 20px; /* Padding for mobile */
+}
+
+/* Modal Content */
+.modalContent {
+  background-color: var(--chatbot-bg-light); /* Use chatbot specific background */
+  border-radius: 16px; /* Use consistent border radius */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh; /* Limit height for scrollability */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; /* For scrollable content */
+  color: var(--chatbot-text-light); /* Use chatbot specific text color */
+}
+
+[data-theme='dark'] .modalContent {
+  background-color: var(--chatbot-bg-dark); /* Dark mode background */
+  color: var(--chatbot-text-dark); /* Dark mode text color */
+}
+
+/* Modal Close Button */
+.modalCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--chatbot-text-light); /* Close button color */
+  line-height: 1;
+  padding: 5px;
+  transition: color 0.2s ease-in-out;
+}
+
+[data-theme='dark'] .modalCloseButton {
+  color: var(--chatbot-text-dark);
+}
+
+.modalCloseButton:hover {
+  color: var(--chatbot-primary); /* Highlight on hover */
+}
+
+/* Modal Title */
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 20px 25px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Use chatbot specific border color */
+  margin-bottom: 0;
+  color: var(--chatbot-text-light);
+}
+
+[data-theme='dark'] .modalTitle {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  color: var(--chatbot-text-dark);
+}
+
+/* Modal Body - Translated Content */
+.modalBody {
+  padding: 20px 25px;
+  overflow-y: auto; /* Make content scrollable */
+  flex-grow: 1; /* Allow body to take available space */
+  line-height: 1.8; /* Larger line height for Urdu text */
+  text-align: right; /* Right-to-left for Urdu */
+  direction: rtl; /* Explicitly set RTL direction */
+  font-family: 'Noto Nastaliq Urdu', 'Times New Roman', serif; /* Example font for Urdu */
+  font-size: 1.1rem; /* Slightly larger font size */
+}
+
+/* Markdown specific styling within modal body */
+.modalBody p,
+.modalBody li {
+  margin-bottom: 1em;
+}
+
+.modalBody h1,
+.modalBody h2,
+.modalBody h3,
+.modalBody h4,
+.modalBody h5,
+.modalBody h6 {
+  text-align: right; /* Ensure headings are also RTL */
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  line-height: 1.4;
+  padding: 0.5em 1em; /* Add padding for the strip effect */
+  background-color: rgba(0, 128, 128, 0.05); /* Very light teal background strip */
+  border-radius: 4px; /* Slightly rounded corners for the strip */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Keep subtle bottom border */
+}
+
+[data-theme='dark'] .modalBody h1,
+[data-theme='dark'] .modalBody h2,
+[data-theme='dark'] .modalBody h3,
+[data-theme='dark'] .modalBody h4,
+[data-theme='dark'] .modalBody h5,
+[data-theme='dark'] .modalBody h6 {
+  background-color: rgba(64, 192, 192, 0.05); /* Subtle background for dark mode */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border for dark mode */
+}
+
+
+/* Preserve code blocks formatting */
+.modalBody pre {
+  direction: ltr; /* Ensure code blocks are LTR */
+  text-align: left; /* Ensure code blocks are left-aligned */
+  background-color: var(--ifm-code-background); /* Use theme code background */
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+/* Loading State in Modal */
+.modalLoadingText, .modalErrorText {
+  text-align: center;
+  padding: 30px;
+  font-size: 1.2rem;
+  color: var(--chatbot-text-light);
+}
+
+[data-theme='dark'] .modalLoadingText, [data-theme='dark'] .modalErrorText {
+  color: var(--chatbot-text-dark);
+}
+
+.modalErrorText {
+  color: var(--ifm-color-danger); /* Red color for errors */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modalContent {
+    width: 95%; /* Slightly larger width on smaller screens */
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    max-height: 100vh;
+  }
+  .modalOverlay {
+    padding: 0;
+  }
+}

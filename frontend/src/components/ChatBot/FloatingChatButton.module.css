@@ -5,7 +5,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-light) 100%);
+  background: linear-gradient(135deg, var(--chatbot-primary) 0%, var(--chatbot-primary-light) 100%); /* Use chatbot primary colors */
   border: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   cursor: pointer;
@@ -20,9 +20,31 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 .icon {
-  font-size: 28px;
-  color: white;
+  font-size: 28px; /* For the '✕' when open */
+  color: var(--chatbot-icon-color); /* Use custom CSS variable */
+  display: flex; /* To center the SVG icon */
+  align-items: center;
+  justify-content: center;
 }
+
+/* Styling for the SVG icon */
+.svgIcon {
+  width: 28px; /* Size the SVG to match font-size of '✕' */
+  height: 28px;
+  color: inherit; /* Inherit color from parent .icon */
+}
+
+
+/* Default icon color for light theme */
+:root {
+  --chatbot-icon-color: #1e293b; /* Desired color for light mode */
+}
+
+/* Override for dark theme */
+html[data-theme='dark'] {
+  --chatbot-icon-color: white; /* White for dark mode */
+}
+
 [data-theme='dark'] .button {
-  background: linear-gradient(135deg, var(--ifm-color-primary-dark) 0%, var(--ifm-color-primary) 100%);
+  background: linear-gradient(135deg, var(--chatbot-primary-dark) 0%, var(--chatbot-primary) 100%); /* Use chatbot dark primary colors */
 }

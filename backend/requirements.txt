@@ -7,3 +7,6 @@ trafilatura
 playwright
 requests
 beautifulsoup4
+psycopg2-binary
+fastembed 
+  

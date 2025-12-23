@@ -33,7 +33,7 @@ export default function ChatInput({ onSend, disabled }: Props): JSX.Element {
         rows={1}
       />
       <button className={styles.sendButton} onClick={handleSend} disabled={disabled || !input.trim()}>
-        {disabled ? '⏳' : '🤖'}
+        {disabled ? '⏳' : '➤'}
       </button>
     </div>
   );

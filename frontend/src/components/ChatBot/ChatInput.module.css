@@ -1,24 +1,60 @@
 .inputContainer {
   display: flex;
   padding: 16px;
-  border-top: 1px solid var(--ifm-color-emphasis-300);
+  border-top: 1px solid var(--chatbot-border-color); /* Use chatbot specific border color */
+  background-color: var(--chatbot-bg-light); /* Ensure input container background matches window */
 }
+
+[data-theme='dark'] .inputContainer {
+  background-color: var(--chatbot-bg-dark); /* Dark mode background */
+}
+
 .input {
   flex: 1;
   padding: 12px 16px;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--chatbot-border-color); /* Use chatbot specific border color */
   border-radius: 12px;
-  background: var(--ifm-background-color);
-  color: var(--ifm-font-color-base);
+  background: var(--chatbot-input-bg); /* Use chatbot specific input background */
+  color: var(--chatbot-text-light); /* Use chatbot specific text color */
+  resize: none; /* Prevent manual resizing */
 }
+
+[data-theme='dark'] .input {
+  border-color: var(--chatbot-border-color-dark); /* Dark mode border */
+  background: var(--chatbot-input-bg-dark); /* Dark mode input background */
+  color: var(--chatbot-text-dark); /* Dark mode text color */
+}
+
 .sendButton {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: var(--ifm-color-primary);
+  background: var(--chatbot-primary); /* Use chatbot primary color */
   color: white;
   font-size: 20px;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-[data-theme='dark'] .input {
-  border-color: var(--ifm-color-emphasis-400);
+
+.sendButton:hover:not(:disabled) {
+  background-color: var(--chatbot-primary-dark); /* Darker on hover */
+}
+
+.sendButton:disabled {
+  background-color: var(--ifm-color-emphasis-300); /* Docusaurus default gray for disabled */
+  cursor: not-allowed;
+}
+
+/* Define chatbot-specific colors if not already in ChatWindow.module.css */
+/* These will be overridden by ChatWindow.module.css if it's imported later */
+:root {
+  --chatbot-border-color: rgba(0, 0, 0, 0.1);
+  --chatbot-input-bg: #f9f9f9;
+}
+
+[data-theme='dark'] {
+  --chatbot-border-color-dark: rgba(255, 255, 255, 0.1);
+  --chatbot-input-bg-dark: #3a475a;
 }
