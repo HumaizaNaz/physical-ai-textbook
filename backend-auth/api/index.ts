@@ -47,9 +47,28 @@ export default async function handler(req: any, res: any) {
     return res.status(500).json({ error: 'Server configuration error: Database connection not available' });
   }
 
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  // CORS headers - Allow your frontend domain specifically
+  const allowedOrigins = [
+    'https://physical-ai-textbook-five.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    process.env.FRONTEND_URL
+  ].filter(Boolean); // Remove any undefined values
+
+  const origin = req.headers.origin;
+
+  // Check if the origin is in the allowed list
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    // Default to the primary frontend URL if origin is not in the allowed list
+    res.setHeader("Access-Control-Allow-Origin", 'https://physical-ai-textbook-five.vercel.app');
+  }
+
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept, Origin, Access-Control-Request-Method, Access-Control-Request-Headers");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,PATCH");
+  res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours
 
   if (req.method === "OPTIONS") return res.status(200).end();
 
@@ -530,6 +549,12 @@ export default async function handler(req: any, res: any) {
         return res.status(400).json({ error: 'Email is required' });
       }
 
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ error: 'Invalid email format' });
+      }
+
       try {
         // Check if user exists
         const userResult = await pool.query(
@@ -539,6 +564,7 @@ export default async function handler(req: any, res: any) {
 
         if (userResult.rows.length === 0) {
           // For security, return success even if email doesn't exist to prevent email enumeration
+          console.log(`Password reset requested for non-existent email: ${email}`);
           return res.status(200).json({
             message: 'If an account with this email exists, password reset instructions have been sent'
           });
@@ -553,7 +579,7 @@ export default async function handler(req: any, res: any) {
 
         // In a real application, you would send an email with the reset token
         // For now, we'll just log it for testing purposes
-        console.log(`Password reset token for ${email}: ${resetToken}`);
+        console.log(`Password reset token generated for ${email}: ${resetToken}`);
 
         // In production, you would send an email here using a service like SendGrid, AWS SES, etc.
         // Example with nodemailer:
@@ -564,9 +590,13 @@ export default async function handler(req: any, res: any) {
         return res.status(200).json({
           message: 'If an account with this email exists, password reset instructions have been sent'
         });
-      } catch (error) {
+      } catch (error: any) {
         console.error('Password reset request error:', error);
-        return res.status(500).json({ error: 'Password reset request failed' });
+        console.error('Error details:', error.message, error.stack);
+        return res.status(500).json({
+          error: 'Password reset request failed',
+          details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
       }
     }
 
@@ -579,6 +609,11 @@ export default async function handler(req: any, res: any) {
         return res.status(400).json({ error: 'Token and new password are required' });
       }
 
+      // Validate password strength
+      if (newPassword.length < 8) {
+        return res.status(400).json({ error: 'Password must be at least 8 characters long' });
+      }
+
       try {
         // Verify the reset token
         const decoded: any = jwt.verify(token, JWT_SECRET);
@@ -587,20 +622,39 @@ export default async function handler(req: any, res: any) {
           return res.status(400).json({ error: 'Invalid token type' });
         }
 
+        if (!decoded.email) {
+          return res.status(400).json({ error: 'Email not found in token' });
+        }
+
         // Hash the new password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         // Update the user's password
-        await pool.query(
-          'UPDATE users SET password = $1 WHERE email = $2',
+        const result = await pool.query(
+          'UPDATE users SET password = $1 WHERE email = $2 RETURNING id',
           [hashedPassword, decoded.email]
         );
+
+        if (result.rowCount === 0) {
+          return res.status(400).json({ error: 'User not found' });
+        }
+
+        console.log(`Password successfully reset for user: ${decoded.email}`);
 
         return res.status(200).json({
           message: 'Password reset successfully'
         });
-      } catch (error) {
-        return res.status(400).json({ error: 'Invalid or expired token' });
+      } catch (error: any) {
+        console.error('Password reset error:', error);
+        if (error.name === 'TokenExpiredError') {
+          return res.status(400).json({ error: 'Reset token has expired' });
+        } else if (error.name === 'JsonWebTokenError') {
+          return res.status(400).json({ error: 'Invalid reset token' });
+        }
+        return res.status(400).json({
+          error: 'Invalid or expired token',
+          details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
       }
     }
 
