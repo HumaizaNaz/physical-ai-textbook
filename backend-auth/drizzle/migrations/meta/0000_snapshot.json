@@ -1,0 +1,87 @@
+{
+  "id": "12c7bfa7-5888-44ec-a6e0-c35b6163306d",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.users_background": {
+      "name": "users_background",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "programming_experience": {
+          "name": "programming_experience",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'None'"
+        },
+        "ros_experience": {
+          "name": "ros_experience",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'None'"
+        },
+        "linux_familiarity": {
+          "name": "linux_familiarity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Beginner'"
+        },
+        "hardware_experience": {
+          "name": "hardware_experience",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'None'"
+        },
+        "electronics_knowledge": {
+          "name": "electronics_knowledge",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'None'"
+        },
+        "robotics_projects": {
+          "name": "robotics_projects",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'None'"
+        },
+        "learning_goal": {
+          "name": "learning_goal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'General Learning'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

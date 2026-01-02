@@ -1,18 +1,54 @@
 // frontend/src/theme/Root.tsx
 import React, { ReactNode, useState, useEffect } from 'react';
 import ChatBot from '@site/src/components/ChatBot/index';
-import UrduTranslateButton from '@site/src/components/UrduTranslateButton'; // Removed .jsx
-import UrduTranslationModal from '@site/src/components/UrduTranslationModal'; // Removed .jsx
+import UrduTranslateButton from '@site/src/components/UrduTranslateButton';
+import UrduTranslationModal from '@site/src/components/UrduTranslationModal';
+import { PasswordResetModal } from '@site/src/components/Auth/PasswordResetModal';
+
+import { AuthProvider } from '@site/src/components/Auth';
+import { UIProvider } from '@site/src/components/UI/UIContext';
+
 
 interface RootProps {
   children?: ReactNode;
 }
 
-const Root: React.FC<RootProps> = ({ children }) => {
+const RootComponent: React.FC<RootProps> = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const [translatedText, setTranslatedText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isChapterPage, setIsChapterPage] = useState(false);
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
+
+  useEffect(() => {
+    const handlePathChange = () => {
+      if (window.location.pathname.includes('/docs/')) {
+        setIsChapterPage(true);
+      } else {
+        setIsChapterPage(false);
+      }
+    };
+
+    handlePathChange(); // Initial check
+
+    // Docusaurus uses client-side routing, so we need to listen for changes
+    const observer = new MutationObserver(handlePathChange);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Handle custom events for opening modals
+    const handleOpenPasswordResetModal = () => {
+      setShowPasswordResetModal(true);
+    };
+
+    window.addEventListener('openPasswordResetModal', handleOpenPasswordResetModal);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('openPasswordResetModal', handleOpenPasswordResetModal);
+    };
+  }, []); 
+
 
   const extractChapterText = (): string => {
     const mainContent =
@@ -73,8 +109,9 @@ const Root: React.FC<RootProps> = ({ children }) => {
   return (
     <>
       {children}
-      <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: 1000 }}>
+      <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: 1000, display: 'flex', gap: '10px' }}>
         <UrduTranslateButton onClick={translateCurrentChapter} />
+        {isChapterPage }
       </div>
 
       <UrduTranslationModal
@@ -84,9 +121,29 @@ const Root: React.FC<RootProps> = ({ children }) => {
         isLoading={isLoading}
         errorMessage={errorMessage}
       />
+      <PasswordResetModal
+        isOpen={showPasswordResetModal}
+        onClose={() => setShowPasswordResetModal(false)}
+        onSwitchToSignin={() => {
+          setShowPasswordResetModal(false);
+          // Trigger the signin modal
+          window.dispatchEvent(new CustomEvent('openSigninModal'));
+        }}
+      />
       <ChatBot />
     </>
   );
 };
+
+const Root: React.FC<RootProps> = ({ children }) => {
+  return (
+    <AuthProvider>
+      <UIProvider>
+        <RootComponent>{children}</RootComponent>
+      </UIProvider>
+    </AuthProvider>
+  );
+};
+
 
 export default Root;

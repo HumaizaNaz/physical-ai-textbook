@@ -6,7 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #0284c7; /* Accent blue */
+  --ifm-color-primary: #059797; /* Accent blue */
   --ifm-color-primary-dark: #0268a0; /* Calculated for consistency */
   --ifm-color-primary-darker: #014c77; /* Calculated for consistency */
   --ifm-color-primary-darkest: #01385c; /* Calculated for consistency */
@@ -24,6 +24,11 @@
 
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --glass-background: rgba(255, 255, 255, 0.6);
+  --glass-backdrop-filter: blur(10px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 .footer {
   background-color: #E5F3FD;; /* Rebecca Purple for light mode footer, matching navbar */
@@ -49,6 +54,11 @@
   --ifm-color-footer-link: var(--ifm-color-primary); /* Accent color */
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --glass-background: rgba(29, 41, 59, 0.7);
+  --glass-backdrop-filter: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 

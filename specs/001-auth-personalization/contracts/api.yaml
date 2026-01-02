@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Auth + Personalization API
+  version: 1.0.0
+paths:
+  /signup:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                programming_level:
+                  type: string
+                  enum: [Beginner, Intermediate, Advanced]
+                hardware_level:
+                  type: string
+                  enum: [None, Basic, Advanced]
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+  /login:
+    post:
+      summary: Authenticate a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+        '401':
+          description: Unauthorized
+  /logout:
+    post:
+      summary: Log out a user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Logout successful
+  /me:
+    get:
+      summary: Get current user information
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    format: email
+                  programming_level:
+                    type: string
+                  hardware_level:
+                    type: string
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,155 +1,600 @@
-/* =========================
-   SECTION
-   ========================= */
+/* ========== Stats Section ========== */
+.statsSection {
+  padding: 4rem 0 3rem;
+  background: var(--ifm-background-color);
+  margin-bottom: 3rem;
+  border-top: 2px solid var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.statCard {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border-radius: 12px;
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ifm-color-primary), transparent);
+  opacity: 0.6;
+}
+
+.statCard:nth-child(1) { animation-delay: 0.1s; }
+.statCard:nth-child(2) { animation-delay: 0.2s; }
+.statCard:nth-child(3) { animation-delay: 0.3s; }
+.statCard:nth-child(4) { animation-delay: 0.4s; }
+
+.statCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 32px rgba(0, 153, 204, 0.3);
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .statCard:hover {
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
+}
+
+.statNumber {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+  animation: countUp 1s ease-out;
+}
+
+.statLabel {
+  font-size: 1.1rem;
+  color: var(--ifm-font-color-base);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========== Features Section ========== */
 .features {
+  display: flex;
+  align-items: center;
   padding: 3rem 0;
   width: 100%;
-  overflow-x: hidden; /* Hide overflow for the section itself */
 }
 
-/* On mobile, we want vertical stacking, so no special container overflow for now */
-/* We will re-introduce overflow-x: auto for larger screens if needed for the one-line */
-
-
-.featureCardsRow {
-  display: flex; /* Use flexbox */
-  flex-wrap: wrap; /* Allow cards to wrap to the next line by default (for mobile) */
-  justify-content: center; /* Center cards when stacked or fewer than 3 */
-  align-items: stretch; /* IMPORTANT: Ensure cards stretch to equal height */
-  margin: 0; /* Reset margin from previous attempts to counteract card margins */
+.feature {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 12px;
+  padding: 1.5rem;
 }
 
+.feature:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 153, 204, 0.3);
+}
 
-/* =========================
-   VIDEO
-   ========================= */
-.featureVideo {
-  height: 170px;
-  width: 100%;
-  border-radius: 14px;
-  object-fit: cover;
+[data-theme='dark'] .feature:hover {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.featureIcon {
+  font-size: 4rem;
   margin-bottom: 1rem;
-  transition: transform 0.4s ease;
+  animation: breathing 2s ease-in-out infinite;
+  color: var(--ifm-color-primary);
 }
 
-/* =========================
-   CARD BASE
-   ========================= */
-.featureCard {
-  display: flex;
-  flex-direction: column;
-  /* height: 100%; Removed, letting flex grow handle it */
-  padding: 1.25rem;
-  border-radius: 18px;
-  transition: all 0.35s ease;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  margin: 0.75rem; /* Margin around cards for spacing, default for all sizes */
-  flex-basis: 100%; /* Default to full width for mobile */
-  flex-shrink: 0; /* Prevent shrinking below basis */
-  min-width: 280px; /* Minimum width for mobile cards */
-  max-width: 400px; /* Max width for mobile cards when stacking, for better appearance */
-  /* min-height: 400px; Removed, relying on align-items: stretch */
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
-/* =========================
-   LIGHT MODE
-   ========================= */
-html[data-theme='light'] .featureCard {
-  background: #E5F3FD;
-  color: #0f172a;
-  border: 1px solid #dbeafe;
-}
-
-/* =========================
-   DARK MODE
-   ========================= */
-html[data-theme='dark'] .featureCard {
-  background: #1e293b;
-  color: #e5e7eb;
-  border: 1px solid #334155;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
-}
-
-/* =========================
-   HOVER EFFECT (SUBTLE & CLASSY)
-   ========================= */
-.featureCard:hover {
-  transform: translateY(-8px);
-}
-
-.featureCard:hover .featureVideo {
-  transform: scale(1.04);
-}
-
-/* =========================
-   FEATURE CONTENT CONTAINER
-   ========================= */
-.featureContent {
-  flex-grow: 1; /* Allow this section to take up available vertical space */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Distribute space between title and description */
-}
-
-
-/* =========================
-   TEXT
-   ========================= */
-.featureCard h3 {
-  font-size: 1.35rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
+/* ========== Section Headers ========== */
+.sectionHeader {
   text-align: center;
+  margin-bottom: 3rem;
 }
 
-.featureCard p {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  opacity: 0.9;
-  text-align: center;
-  flex-grow: 1; /* Allow paragraph to grow */
-  /* Removed max-height and overflow-y: auto */
-  /* Removed padding-right and padding-left */
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--ifm-heading-color);
 }
 
-.featureCard::after {
+.titleIcon {
+  font-size: 2rem;
+  animation: pulse 2s ease-in-out infinite;
+  color: var(--ifm-color-primary);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+.sectionSubtitle {
+  font-size: 1.2rem;
+  color: var(--ifm-font-color-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========== Course Modules Section ========== */
+.modulesSection {
+  padding: 4rem 0;
+  background: var(--ifm-background-surface-color);
+}
+
+.modulesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.moduleCard {
+  position: relative;
+  padding: 2.5rem 2rem;
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border-radius: 12px;
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+  animation: slideInLeft 0.6s ease forwards;
+  opacity: 0;
+}
+
+.moduleCard:nth-child(1) { animation-delay: 0.1s; }
+.moduleCard:nth-child(2) { animation-delay: 0.2s; }
+.moduleCard:nth-child(3) { animation-delay: 0.3s; }
+.moduleCard:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.moduleCard::before {
   content: '';
-  height: 3px;
-  width: 40px;
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 4px;
-  background: var(--ifm-color-primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ifm-color-primary), var(--ifm-color-accent), transparent);
+  opacity: 0.6;
 }
 
+.moduleCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 153, 204, 0.25);
+  border-color: var(--ifm-color-primary);
+}
 
-/* =========================
-   RESPONSIVE - TABLET & DESKTOP (3 cards in one line)
-   ========================= */
-@media screen and (min-width: 768px) {
-  .featureCardsContainer {
-    /* Removed overflow-x: auto and scrollbar hiding */
-    padding-bottom: 1rem;
-    -webkit-overflow-scrolling: touch;
+[data-theme='dark'] .moduleCard:hover {
+  box-shadow: 0 12px 35px rgba(0, 212, 255, 0.25);
+}
+
+.moduleIcon {
+  font-size: 3rem;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
   }
-
-  .featureCardsRow {
-    flex-wrap: wrap; /* Allow cards to wrap again */
-    justify-content: center; /* Center cards in rows */
-    margin: 0 -0.75rem; /* Counteract margin on individual cards for full width */
-  }
-
-  .featureCard {
-    flex-basis: calc(33.333% - 1.5rem); /* Three cards per row, accounting for margin */
-    margin: 0.75rem; /* Re-apply margin for horizontal spacing */
-    min-width: 280px; /* Ensure minimum width for desktop cards */
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-/* Further adjustments for larger desktops if needed */
-@media screen and (min-width: 996px) {
-  .featureCard {
-    max-width: none; /* Remove max-width constraint for larger screens */
+.moduleTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  margin-bottom: 1rem;
+}
+
+.moduleDescription {
+  font-size: 1rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.moduleNumber {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--ifm-color-emphasis-200);
+  line-height: 1;
+}
+
+/* ========== Why Choose Section ========== */
+.whyChooseSection {
+  padding: 4rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.benefitCard {
+  padding: 2.5rem 2rem;
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border-radius: 12px;
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+  text-align: center;
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefitCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ifm-color-primary), transparent);
+  opacity: 0.5;
+}
+
+.benefitCard:nth-child(1) { animation-delay: 0.1s; }
+.benefitCard:nth-child(2) { animation-delay: 0.2s; }
+.benefitCard:nth-child(3) { animation-delay: 0.3s; }
+.benefitCard:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
+}
+
+.benefitCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 153, 204, 0.25);
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .benefitCard:hover {
+  box-shadow: 0 12px 35px rgba(0, 212, 255, 0.25);
+}
+
+.benefitIcon {
+  font-size: 3rem;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1.5rem;
+  animation: rotate360 4s linear infinite;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.benefitCard h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.benefitCard p {
+  font-size: 1rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========== CTA Section ========== */
+.ctaSection {
+  padding: 5rem 0;
+  background: var(--ifm-background-color);
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--ifm-color-emphasis-100) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: moveBackground 20s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes moveBackground {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(50px, 50px);
+  }
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+}
+
+.ctaContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ifm-color-primary), var(--ifm-color-accent), transparent);
+  opacity: 0.8;
+}
+
+.ctaTitle {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--ifm-heading-color);
+  margin-bottom: 1.5rem;
+  animation: slideInDown 0.8s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ctaSubtitle {
+  font-size: 1.3rem;
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 2.5rem;
+  animation: slideInUp 0.8s ease;
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: scaleIn 0.8s ease;
+  animation-delay: 0.4s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ctaButtons .button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.ctaButtons .button:hover {
+  transform: translateY(-3px);
+}
+
+/* ========== Mobile Responsiveness ========== */
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 1.5rem 0;
+  }
+
+  .featureIcon {
+    font-size: 3rem;
+  }
+
+  .statsSection {
+    padding: 3rem 0 2rem;
+  }
+
+  .statNumber {
+    font-size: 2.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .modulesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .moduleCard {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaTitle {
+    font-size: 2.2rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ctaButtons .button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .features {
+    padding: 1rem 0;
+  }
+
+  .featureIcon {
+    font-size: 2.5rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .statCard {
+    padding: 1.5rem 1rem;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+
+  .statLabel {
+    font-size: 0.9rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.7rem;
+  }
+
+  .titleIcon {
+    font-size: 1.5rem;
+  }
+
+  .modulesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaTitle {
+    font-size: 1.8rem;
+  }
+
+  .ctaSubtitle {
+    font-size: 1.1rem;
+  }
+
+  .ctaContent {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.cardLink {
+  text-decoration: none;
+}
+
+.cardLink:hover {
+  text-decoration: none;
 }

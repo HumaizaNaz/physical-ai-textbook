@@ -1,0 +1,1 @@
+https://better-auth-taupe-nine.vercel.app/api/auth/sign-up/email

@@ -1,89 +1,74 @@
 import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Heading from '@theme/Heading';
+import { FaRobot, FaCubes, FaGamepad } from 'react-icons/fa';
+
+import Feature from './Feature';
+import StatsSection from './StatsSection';
+import CourseModulesSection from './CourseModulesSection';
+import WhyChooseSection from './WhyChooseSection';
+import CTASection from './CTASection';
 import styles from './styles.module.css';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Import useDocusaurusContext
 
 type FeatureItem = {
   title: string;
-  videoSrc: string; 
+  Icon: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
 };
 
-const RawFeatureList: (
-  Omit<FeatureItem, 'videoSrc'> & { videoFileName: string }
-)[] = [
+const FeatureList: FeatureItem[] = [
   {
-    title: 'Master Physical AI',
-    videoFileName: 'digital-twin.mp4',
+    title: 'Comprehensive Introduction to ROS2',
+    Icon: FaRobot,
     description: (
       <>
-        Build a strong foundation in Physical AI and embodied intelligence.
-  Learn how AI systems sense, understand, and act in the real world
-  using ROS 2, sensors, and humanoid control architectures.
+        Dive deep into the Robot Operating System 2 (ROS2), the industry-standard framework for robotics. Learn the core concepts, from nodes and topics to services and actions, and build a solid foundation for developing complex robot behaviors.
       </>
     ),
   },
   {
-    title: 'Simulate Humanoids in 3D Worlds',
-    videoFileName: 'vla.mp4',
+    title: 'Build Your Own Digital Twin',
+    Icon: FaCubes,
     description: (
       <>
-        Create high-fidelity digital twins using Gazebo and Unity.
-  Simulate physics, collisions, LiDAR, depth cameras, and IMU sensors
-  to test robots in realistic environments before deployment.
+        Create a detailed virtual model of a humanoid robot from scratch. Master the use of URDF and Xacro to define the robot's physical properties, and learn how to assemble a complete digital twin for simulation and testing.
       </>
     ),
   },
   {
-    title: 'Build Intelligent Robot Brains',
-    videoFileName: 'robot-brain.mp4',
+    title: 'Simulate and Control',
+    Icon: FaGamepad,
     description: (
       <>
-         Integrate advanced AI using NVIDIA Isaac, VSLAM, and navigation systems.
-  Combine Vision-Language-Action models with ROS 2 to enable natural
-  language commands, perception, and autonomous decision-making.
+        Bring your robot to life in a simulated environment. Use Gazebo to test and refine your robot's movements and interactions. Learn how to develop and implement control strategies in ROS2 to make your humanoid robot walk, grasp, and perform tasks.
       </>
     ),
   },
 ];
 
-function Feature({title, videoSrc, description}: FeatureItem) {
-  return (
-    <div className={clsx('col col--4', styles.featureCard)}>
-      <div className="text--center">
-        <video className={styles.featureVideo} autoPlay loop muted playsInline>
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      </div>
-
-      <div className={clsx("padding-horiz--md", styles.featureContent)}>
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
-    </div>
-  );
-}
-
-
 export default function HomepageFeatures(): ReactNode {
-  const {siteConfig} = useDocusaurusContext(); // Get siteConfig from context
-  const baseUrl = siteConfig.baseUrl; // Extract baseUrl
-
-  const FeatureList: FeatureItem[] = RawFeatureList.map(item => ({
-    ...item,
-    videoSrc: `${baseUrl}videos/${item.videoFileName}`, // Prepend baseUrl
-  }));
-
   return (
-    <section className={styles.features}>
-      <div className={clsx("container", styles.featureCardsContainer)}>
-        <div className={clsx("row", styles.featureCardsRow)}>
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
+    <>
+      {/* Stats Section */}
+      <StatsSection />
+
+      {/* Main Features */}
+      <section className={styles.features}>
+        <div className="container">
+          <div className="row">
+            {FeatureList.map((props, idx) => (
+              <Feature key={idx} {...props} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Course Modules */}
+      <CourseModulesSection />
+
+      {/* Why Choose */}
+      <WhyChooseSection />
+
+      {/* Call to Action */}
+      <CTASection />
+    </>
   );
 }
