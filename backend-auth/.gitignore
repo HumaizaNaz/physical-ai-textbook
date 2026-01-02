@@ -133,3 +133,5 @@ dist/
 auth.db
 *.db-shm
 *.db-wal
+.vercel
+.env*.local
